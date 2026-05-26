@@ -36,6 +36,7 @@ import com.amihaiemil.eoyaml.exceptions.YamlReadingException;
  * @since 1.0.0
  */
 interface YamlLine extends Comparable<YamlLine> {
+
     /**
      * Indicates we don't know or don't have a line number for the given
      * comment (may not have come from a file).
@@ -57,28 +58,7 @@ interface YamlLine extends Comparable<YamlLine> {
      * @checkstyle CyclomaticComplexity (100 lines)
      */
     default String trimmed() {
-        String trimmed = this.value().trim();
-        int i = 0;
-        while(i < trimmed.length()) {
-            if(i > 0 && trimmed.charAt(i) == '#') {
-                if(trimmed.charAt(i - 1) == ' ') {
-                    trimmed = trimmed.substring(0, i);
-                    break;
-                }
-            } else if(trimmed.charAt(i) == '"') {
-                i++;
-                while(i < trimmed.length() && trimmed.charAt(i) != '"') {
-                    i++;
-                }
-            } else if(trimmed.charAt(i) == '\'') {
-                i++;
-                while(i < trimmed.length() && trimmed.charAt(i) != '\'') {
-                    i++;
-                }
-            }
-            i++;
-        }
-        return trimmed.trim();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -88,17 +68,7 @@ interface YamlLine extends Comparable<YamlLine> {
      * @return String line contents.
      */
     default String contents(final int previousIndent) {
-        String contents;
-        int indentation = indentation();
-        if (indentation == 0 && previousIndent <= 0) {
-            contents = this.value();
-        } else if (indentation > previousIndent) {
-            contents = this.value().substring(previousIndent + 2);
-        } else {
-            throw new YamlReadingException("Literal must be indented "
-                + "at least 2 spaces from previous element.");
-        }
-        return contents;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -106,27 +76,7 @@ interface YamlLine extends Comparable<YamlLine> {
      * @return Comment of empty string.
      */
     default String comment() {
-        String comment = "";
-        String trimmed = this.value().trim();
-        int i = 0;
-        while(i < trimmed.length()) {
-            if(trimmed.charAt(i) == '#') {
-                comment = trimmed.substring(i + 1);
-                break;
-            } else if(trimmed.charAt(i) == '"') {
-                i++;
-                while(i < trimmed.length() && trimmed.charAt(i) != '"') {
-                    i++;
-                }
-            } else if(trimmed.charAt(i) == '\'') {
-                i++;
-                while(i < trimmed.length() && trimmed.charAt(i) != '\'') {
-                    i++;
-                }
-            }
-            i++;
-        }
-        return comment.trim();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -148,25 +98,7 @@ interface YamlLine extends Comparable<YamlLine> {
      * @return True or false
      */
     default boolean requireNestedIndentation() {
-        final boolean result;
-
-        if("---".equals(this.trimmed())) {
-            result = false;
-        } else {
-            final String trimmed = this.trimmed();
-            final CharSequence prevLineLastChar = trimmed.substring(
-                trimmed.length() - 1
-            );
-            if(prevLineLastChar.charAt(0)  == '?' && trimmed.length() == 1) {
-                result = true;
-            } else {
-                final String otherSpecialChars = "-";
-                result = otherSpecialChars.contains(prevLineLastChar);
-            }
-
-
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -176,15 +108,7 @@ interface YamlLine extends Comparable<YamlLine> {
      *  comparison of the trimmed (no spaces or comments) values.
      */
     default int compareTo(final YamlLine other) {
-        int result = -1;
-        if (this == other) {
-            result = 0;
-        } else if (other == null) {
-            result = 1;
-        } else {
-            result = this.trimmed().compareTo(other.trimmed());
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -194,28 +118,27 @@ interface YamlLine extends Comparable<YamlLine> {
 
         @Override
         public String value() {
-            return "";
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public String trimmed() {
-            return "";
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public String contents(final int previousIndent) {
-            return "";
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public int number() {
-            return UNKNOWN_LINE_NUMBER;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public int indentation() {
-            return -1;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
-
     }
 }

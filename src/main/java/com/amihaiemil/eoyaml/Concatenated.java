@@ -50,45 +50,28 @@ final class Concatenated implements ScalarComment {
      * @param above Comment above the scalar.
      * @param inline Comment inline with the scalar.
      */
-    Concatenated(
-        final Comment above,
-        final Comment inline
-    ) {
+    Concatenated(final Comment above, final Comment inline) {
         this.above = above;
         this.inline = inline;
     }
 
     @Override
     public YamlNode yamlNode() {
-        return this.inline.yamlNode();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String value() {
-        final StringBuilder comment = new StringBuilder();
-        final String aboveValue = this.above.value();
-        final String inlineValue = this.inline.value();
-
-        if(inlineValue.trim().isEmpty()){
-            comment.append(aboveValue);
-        } else if(aboveValue.trim().isEmpty()){
-            comment.append(inlineValue);
-        } else {
-            comment
-                .append(aboveValue)
-                .append(System.lineSeparator())
-                .append(inlineValue);
-        }
-        return comment.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment above() {
-        return this.above;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment inline() {
-        return this.inline;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

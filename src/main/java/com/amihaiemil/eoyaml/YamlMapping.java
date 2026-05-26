@@ -62,12 +62,9 @@ public interface YamlMapping extends YamlNode {
      * @return Collection of {@link YamlNode}
      */
     default Collection<YamlNode> values() {
-        final List<YamlNode> values = new LinkedList<>();
-        for(final YamlNode key : this.keys()) {
-            values.add(this.value(key));
-        }
-        return values;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
+
     /**
      * Get the Yaml mapping associated with the given key.
      * @param key String key
@@ -75,9 +72,7 @@ public interface YamlMapping extends YamlNode {
      *  to a mapping.
      */
     default YamlMapping yamlMapping(final String key) {
-        return this.yamlMapping(
-            Yaml.createYamlScalarBuilder().addLine(key).buildPlainScalar()
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -87,14 +82,7 @@ public interface YamlMapping extends YamlNode {
      *  to a mapping.
      */
     default YamlMapping yamlMapping(final YamlNode key) {
-        final YamlNode value = this.value(key);
-        final YamlMapping found;
-        if (value instanceof YamlMapping) {
-            found = (YamlMapping) value;
-        } else {
-            found = null;
-        }
-        return found;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -104,9 +92,7 @@ public interface YamlMapping extends YamlNode {
      *  to a sequence.
      */
     default YamlSequence yamlSequence(final String key) {
-        return this.yamlSequence(
-            Yaml.createYamlScalarBuilder().addLine(key).buildPlainScalar()
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -116,14 +102,7 @@ public interface YamlMapping extends YamlNode {
      *  to a sequence
      */
     default YamlSequence yamlSequence(final YamlNode key) {
-        final YamlNode value = this.value(key);
-        final YamlSequence found;
-        if (value instanceof YamlSequence) {
-            found =  (YamlSequence) value;
-        } else {
-            found = null;
-        }
-        return found;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -133,9 +112,7 @@ public interface YamlMapping extends YamlNode {
      *  to a scalar.
      */
     default String string(final String key) {
-        return this.string(
-            Yaml.createYamlScalarBuilder().addLine(key).buildPlainScalar()
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -145,15 +122,9 @@ public interface YamlMapping extends YamlNode {
      *  to a scalar.
      */
     default String string(final YamlNode key) {
-        final YamlNode value = this.value(key);
-        final String found;
-        if (value instanceof Scalar) {
-            found = ((Scalar) value).value();
-        } else {
-            found = null;
-        }
-        return found;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
+
     /**
      * Get the String folded block scalar associated with the given key.
      * @param key String key
@@ -161,9 +132,7 @@ public interface YamlMapping extends YamlNode {
      *  to a folded block scalar.
      */
     default String foldedBlockScalar(final String key) {
-        return this.foldedBlockScalar(
-            Yaml.createYamlScalarBuilder().addLine(key).buildPlainScalar()
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -173,15 +142,9 @@ public interface YamlMapping extends YamlNode {
      *  to a folded block scalar.
      */
     default String foldedBlockScalar(final YamlNode key) {
-        final YamlNode value = this.value(key);
-        final String found;
-        if (value instanceof Scalar) {
-            found = ((Scalar) value).value();
-        } else {
-            found = null;
-        }
-        return found;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
+
     /**
      * Get the String lines of the literal block scalar associated
      * with the given key.
@@ -190,9 +153,7 @@ public interface YamlMapping extends YamlNode {
      *  or not pointing to a literal block scalar.
      */
     default Collection<String> literalBlockScalar(final String key) {
-        return this.literalBlockScalar(
-            Yaml.createYamlScalarBuilder().addLine(key).buildPlainScalar()
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -203,28 +164,16 @@ public interface YamlMapping extends YamlNode {
      *  or not pointing to a literal block scalar.
      */
     default Collection<String> literalBlockScalar(final YamlNode key) {
-        final Collection<String> found;
-        final YamlNode value = this.value(key);
-        if(value instanceof Scalar) {
-            found = Arrays.asList(
-                ((Scalar) value)
-                    .value()
-                    .split(System.lineSeparator())
-            );
-        } else {
-            found = null;
-        }
-        return found;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
+
     /**
      * Get the YamlNode mapped to the specified key.
      * @param key String key.
      * @return The found YamlNode or null if nothing is found.
      */
     default YamlNode value(final String key) {
-        return this.value(
-            Yaml.createYamlScalarBuilder().addLine(key).buildPlainScalar()
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -241,9 +190,7 @@ public interface YamlMapping extends YamlNode {
      *  is not a parsable integer.
      */
     default int integer(final String key) {
-        return this.integer(
-            Yaml.createYamlScalarBuilder().addLine(key).buildPlainScalar()
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -260,11 +207,7 @@ public interface YamlMapping extends YamlNode {
      *  is not a parsable integer.
      */
     default int integer(final YamlNode key) {
-        final YamlNode value = this.value(key);
-        if(value instanceof Scalar) {
-            return Integer.parseInt(((Scalar) value).value());
-        }
-        return -1;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -281,9 +224,7 @@ public interface YamlMapping extends YamlNode {
      *  is not a parsable float.
      */
     default float floatNumber(final String key) {
-        return this.floatNumber(
-            Yaml.createYamlScalarBuilder().addLine(key).buildPlainScalar()
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -300,11 +241,7 @@ public interface YamlMapping extends YamlNode {
      *  is not a parsable float.
      */
     default float floatNumber(final YamlNode key) {
-        final YamlNode value = this.value(key);
-        if(value instanceof Scalar) {
-            return Float.parseFloat(((Scalar) value).value());
-        }
-        return -1;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -321,9 +258,7 @@ public interface YamlMapping extends YamlNode {
      *  is not a parsable double.
      */
     default double doubleNumber(final String key) {
-        return this.doubleNumber(
-            Yaml.createYamlScalarBuilder().addLine(key).buildPlainScalar()
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -340,11 +275,7 @@ public interface YamlMapping extends YamlNode {
      *  is not a parsable double.
      */
     default double doubleNumber(final YamlNode key) {
-        final YamlNode value = this.value(key);
-        if(value instanceof Scalar) {
-            return Double.parseDouble(((Scalar) value).value());
-        }
-        return -1.0;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -361,9 +292,7 @@ public interface YamlMapping extends YamlNode {
      *  is not a parsable long.
      */
     default long longNumber(final String key) {
-        return this.longNumber(
-            Yaml.createYamlScalarBuilder().addLine(key).buildPlainScalar()
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -380,11 +309,7 @@ public interface YamlMapping extends YamlNode {
      *  is not a parsable long.
      */
     default long longNumber(final YamlNode key) {
-        final YamlNode value = this.value(key);
-        if(value instanceof Scalar) {
-            return Long.parseLong(((Scalar) value).value());
-        }
-        return -1L;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -400,9 +325,7 @@ public interface YamlMapping extends YamlNode {
      * @throws DateTimeParseException - if the Scalar value cannot be parsed.
      */
     default LocalDate date(final String key) {
-        return this.date(
-            Yaml.createYamlScalarBuilder().addLine(key).buildPlainScalar()
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -418,11 +341,7 @@ public interface YamlMapping extends YamlNode {
      * @throws DateTimeParseException - if the Scalar value cannot be parsed.
      */
     default LocalDate date(final YamlNode key) {
-        final YamlNode value = this.value(key);
-        if(value instanceof Scalar) {
-            return LocalDate.parse(((Scalar) value).value());
-        }
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -438,9 +357,7 @@ public interface YamlMapping extends YamlNode {
      * @throws DateTimeParseException - if the Scalar value cannot be parsed.
      */
     default LocalDateTime dateTime(final String key) {
-        return this.dateTime(
-            Yaml.createYamlScalarBuilder().addLine(key).buildPlainScalar()
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -456,11 +373,7 @@ public interface YamlMapping extends YamlNode {
      * @throws DateTimeParseException - if the Scalar value cannot be parsed.
      */
     default LocalDateTime dateTime(final YamlNode key) {
-        final YamlNode value = this.value(key);
-        if(value instanceof Scalar) {
-            return LocalDateTime.parse(((Scalar) value).value());
-        }
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -476,9 +389,7 @@ public interface YamlMapping extends YamlNode {
      * @return Boolean.
      */
     default boolean bool(final String key) {
-        return this.bool(
-            Yaml.createYamlScalarBuilder().addLine(key).buildPlainScalar()
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -494,21 +405,12 @@ public interface YamlMapping extends YamlNode {
      * @return Boolean.
      */
     default boolean bool(final YamlNode key) {
-        final YamlNode value = this.value(key);
-        if(value instanceof Scalar) {
-            return Boolean.parseBoolean(((Scalar) value).value());
-        }
-        return false;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     default List<YamlNode> children() {
-        final List<YamlNode> children = new ArrayList<>();
-        for (final YamlNode key : this.keys()) {
-            children.add(key);
-            children.add(this.value(key));
-        }
-        return children;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -516,7 +418,7 @@ public interface YamlMapping extends YamlNode {
      * @return JsonObject.
      */
     default JsonObject toJsonObject() {
-        return (JsonObject) this.accept(new YamlToJsonVisitor());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -529,8 +431,6 @@ public interface YamlMapping extends YamlNode {
      *  using a visitor.
      */
     default <T> T toObject(final Class<T> clazz) {
-        throw new UnsupportedOperationException(
-            "Not yet implemented. See decorators-squad/eo-yaml#631"
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

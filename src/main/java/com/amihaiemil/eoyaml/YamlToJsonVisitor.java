@@ -43,59 +43,31 @@ final class YamlToJsonVisitor implements YamlVisitor<JsonValue> {
 
     @Override
     public JsonValue visitYamlMapping(final YamlMapping node) {
-        final JsonObjectBuilder object = Json.createObjectBuilder();
-        node.keys().forEach(
-            k -> {
-                if(k instanceof Scalar) {
-                    final String stringKey = ((Scalar) k).value();
-                    object.add(
-                        stringKey,
-                        this.visitYamlNode(node.value(stringKey))
-                    );
-                } else {
-                    throw new IllegalArgumentException(
-                        "YamlMapping contains key which is not a Scalar. "
-                        + "Cannot convert to JSON!"
-                    );
-                }
-            }
-        );
-        return object.build();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public JsonValue visitYamlSequence(final YamlSequence node) {
-        final JsonArrayBuilder array = Json.createArrayBuilder();
-        node.values().forEach(
-            v -> array.add(this.visitYamlNode(v))
-        );
-        return array.build();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public JsonValue visitYamlStream(final YamlStream node) {
-        final JsonArrayBuilder array = Json.createArrayBuilder();
-        node.values().forEach(
-            v -> array.add(this.visitYamlNode(v))
-        );
-        return array.build();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public JsonValue visitScalar(final Scalar node) {
-        return Json.createValue(node.value());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public JsonValue defaultResult() {
-        return JsonValue.EMPTY_JSON_OBJECT;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public JsonValue aggregateResult(
-        final JsonValue aggregate,
-        final JsonValue nextResult
-    ) {
-        return null;
+    public JsonValue aggregateResult(final JsonValue aggregate, final JsonValue nextResult) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

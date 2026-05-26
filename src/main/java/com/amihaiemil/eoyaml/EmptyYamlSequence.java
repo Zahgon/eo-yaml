@@ -61,27 +61,11 @@ public class EmptyYamlSequence extends BaseYamlSequence {
 
     @Override
     public final Collection<YamlNode> values() {
-        return Collections.emptyList();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public final Comment comment() {
-        final Comment comment;
-        if(this.sequence != null) {
-            comment = this.sequence.comment();
-        } else {
-            comment = new Comment() {
-                @Override
-                public YamlNode yamlNode() {
-                    return EmptyYamlSequence.this;
-                }
-
-                @Override
-                public String value() {
-                    return "";
-                }
-            };
-        }
-        return comment;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

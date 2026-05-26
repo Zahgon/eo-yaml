@@ -82,24 +82,7 @@ final class ReadYamlSequence extends BaseYamlSequence {
     ReadYamlSequence(final YamlLine previous, final AllYamlLines lines) {
         this.previous = previous;
         this.all = lines;
-        this.significant = new SameIndentationLevel(
-            new WellIndented(
-                new CollapsedFlowLines(
-                    new CollapsedFlowLines(
-                        new Skip(
-                            lines,
-                            line -> line.number() <= previous.number(),
-                            line -> line.trimmed().startsWith("#"),
-                            line -> line.trimmed().startsWith("---"),
-                            line -> line.trimmed().startsWith("..."),
-                            line -> line.trimmed().startsWith("%"),
-                            line -> line.trimmed().startsWith("!!")
-                        ), '{', '}'
-                    ), '[', ']'
-                )
-            ),
-            false
-        );
+        this.significant = new SameIndentationLevel(new WellIndented(new CollapsedFlowLines(new CollapsedFlowLines(new Skip(lines, line -> line.number() <= previous.number(), line -> line.trimmed().startsWith("#"), line -> line.trimmed().startsWith("---"), line -> line.trimmed().startsWith("..."), line -> line.trimmed().startsWith("%"), line -> line.trimmed().startsWith("!!")), '{', '}'), '[', ']')), false);
     }
 
     /**
@@ -109,93 +92,12 @@ final class ReadYamlSequence extends BaseYamlSequence {
      */
     @Override
     public Collection<YamlNode> values() {
-        final List<YamlNode> kids = new LinkedList<>();
-        final boolean foldedSequence = this.previous.trimmed().matches(
-            "^.*\\|.*\\-$"
-        );
-        boolean innerValueStarted = false;
-        for(final YamlLine line : this.significant) {
-            final String trimmed = line.trimmed();
-            if(foldedSequence || trimmed.startsWith("-")) {
-                if ("-".equals(trimmed)
-                    || trimmed.endsWith("|")
-                    || trimmed.endsWith(">")
-                ) {
-                    innerValueStarted = true;
-                    kids.add(this.significant.nextYamlNode(line));
-                } else {
-                    innerValueStarted = false;
-                    if(this.blockMappingStartsAtDash(line)) {
-                        kids.add(
-                            new ReadYamlMapping(
-                                line.number() + 1,
-                                this.getPreviousLine(line),
-                                this.all
-                            )
-                        );
-                    } else if(this.flowSequenceStartsAtDash(line)) {
-                        innerValueStarted = true;
-                        kids.add(
-                            new ReadFlowSequence(
-                                this.getPreviousLine(line),
-                                this.all
-                            )
-                        );
-                    } else if(this.flowMappingStartsAtDash(line)) {
-                        innerValueStarted = true;
-                        kids.add(
-                            new ReadFlowMapping(
-                                this.getPreviousLine(line),
-                                this.all
-                            )
-                        );
-                    } else {
-                        kids.add(new ReadPlainScalar(this.all, line));
-                    }
-                }
-            } else {
-                if(!innerValueStarted) {
-                    break;
-                }
-            }
-        }
-        return kids;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        boolean documentComment = this.previous.number() < 0;
-        //@checkstyle LineLength (50 lines)
-        return new ReadComment(
-            new Backwards(
-                new FirstCommentFound(
-                    new Backwards(
-                        new Skip(
-                            this.all,
-                            line -> {
-                                final boolean skip;
-                                if(documentComment) {
-                                    if(this.significant.iterator().hasNext()) {
-                                        skip = line.number() >= this.significant
-                                                .iterator().next().number();
-                                    } else {
-                                        skip = false;
-                                    }
-                                } else {
-                                    skip = line.number() >= this.previous.number();
-                                }
-                                return skip;
-                            },
-                            line -> line.trimmed().startsWith("..."),
-                            line -> line.trimmed().startsWith("%"),
-                            line -> line.trimmed().startsWith("!!")
-                        )
-                    ),
-                    documentComment
-                )
-            ),
-            this
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -206,8 +108,7 @@ final class ReadYamlSequence extends BaseYamlSequence {
      */
     private boolean blockMappingStartsAtDash(final YamlLine dashLine) {
         final String trimmed = dashLine.trimmed();
-        final boolean escapedScalar = trimmed.matches("^\\s*-\\s*\".*\"$")
-            || trimmed.matches("^\\s*-\\s*'.*'$");
+        final boolean escapedScalar = trimmed.matches("^\\s*-\\s*\".*\"$") || trimmed.matches("^\\s*-\\s*'.*'$");
         return trimmed.matches("^.*-.+:(|\\s.*)$") && !escapedScalar;
     }
 

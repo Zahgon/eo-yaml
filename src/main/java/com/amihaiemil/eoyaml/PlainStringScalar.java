@@ -69,18 +69,9 @@ final class PlainStringScalar extends BaseScalar {
      * @param above Comment above the scalar.
      * @param inline Comment inline with the scalar.
      */
-    PlainStringScalar(
-        final String value, final String above, final String inline
-    ) {
+    PlainStringScalar(final String value, final String above, final String inline) {
         this.value = value;
-        this.comment = new Concatenated(
-            new BuiltComment(
-                this, above
-            ),
-            new InlineComment(
-                new BuiltComment(this, inline)
-            )
-        );
+        this.comment = new Concatenated(new BuiltComment(this, above), new InlineComment(new BuiltComment(this, inline)));
     }
 
     /**
@@ -89,18 +80,12 @@ final class PlainStringScalar extends BaseScalar {
      */
     @Override
     public String value() {
-        final String unescaped;
-        if("null".equals(this.value)) {
-            unescaped = null;
-        } else {
-            unescaped = this.unescape(this.value);
-        }
-        return unescaped;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        return this.comment;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -111,7 +96,7 @@ final class PlainStringScalar extends BaseScalar {
      */
     private String unescape(final String escaped) {
         final String unescaped;
-        if(escaped == null) {
+        if (escaped == null) {
             unescaped = escaped;
         } else {
             if (escaped.startsWith("\"") && escaped.endsWith("\"")) {

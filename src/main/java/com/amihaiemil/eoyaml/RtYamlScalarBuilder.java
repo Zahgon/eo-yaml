@@ -63,28 +63,22 @@ final class RtYamlScalarBuilder implements YamlScalarBuilder {
 
     @Override
     public YamlScalarBuilder addLine(final String value) {
-        final List<String> all = new LinkedList<>();
-        all.addAll(this.lines);
-        all.add(value);
-        return new RtYamlScalarBuilder(all);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Scalar buildPlainScalar(final String above, final String inline) {
-        final String plain = this.lines.stream().filter(line -> line!=null).map(
-            line -> line.replaceAll(System.lineSeparator(), " ")
-        ).collect(Collectors.joining(" "));
-        return new PlainStringScalar(plain, above, inline);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Scalar buildFoldedBlockScalar(final String comment) {
-        return new BuiltFoldedBlockScalar(this.lines, comment);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Scalar buildLiteralBlockScalar(final String comment) {
-        return new BuiltLiteralBlockScalar(this.lines, comment);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -118,9 +112,7 @@ final class RtYamlScalarBuilder implements YamlScalarBuilder {
          * @param comment Comment referring to this scalar.
          * @param lines Given string lines.
          */
-        BuiltFoldedBlockScalar(
-            final List<String> lines, final String comment
-        ) {
+        BuiltFoldedBlockScalar(final List<String> lines, final String comment) {
             this.lines = lines;
             this.comment = new BuiltComment(this, comment);
         }
@@ -136,21 +128,17 @@ final class RtYamlScalarBuilder implements YamlScalarBuilder {
          */
         @Override
         public String value() {
-            return this.lines.stream().map(
-                line -> line.replaceAll(System.lineSeparator(), " ")
-            ).collect(Collectors.joining(" "));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Comment comment() {
-            return this.comment;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         final List<String> unfolded() {
-            final List<String> unfolded = new ArrayList<>();
-            unfolded.addAll(this.lines);
-            return unfolded;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -185,13 +173,10 @@ final class RtYamlScalarBuilder implements YamlScalarBuilder {
          * @param lines Given string lines.
          * @param comment Comment referring to this scalar.
          */
-        BuiltLiteralBlockScalar(
-            final List<String> lines, final String comment
-        ) {
+        BuiltLiteralBlockScalar(final List<String> lines, final String comment) {
             this.lines = lines;
             this.comment = new BuiltComment(this, comment);
         }
-
 
         /**
          * Return the value of this literal scalar.
@@ -199,14 +184,12 @@ final class RtYamlScalarBuilder implements YamlScalarBuilder {
          */
         @Override
         public String value() {
-            return this.lines.stream().collect(
-                Collectors.joining(System.lineSeparator())
-            );
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Comment comment() {
-            return this.comment;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

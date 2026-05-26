@@ -29,7 +29,6 @@ package com.amihaiemil.eoyaml;
 
 import com.amihaiemil.eoyaml.exceptions.YamlPrintException;
 import com.amihaiemil.eoyaml.exceptions.YamlReadingException;
-
 import java.io.IOException;
 import java.io.StringWriter;
 
@@ -70,38 +69,28 @@ abstract class BaseYamlNode implements YamlNode {
     }
 
     @Override
-    public final Scalar asScalar()
-        throws YamlReadingException, ClassCastException {
-        return this.asClass(Scalar.class, Node.SCALAR);
+    public final Scalar asScalar() throws YamlReadingException, ClassCastException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public final YamlMapping asMapping()
-        throws YamlReadingException, ClassCastException {
-        return this.asClass(YamlMapping.class, Node.MAPPING);
+    public final YamlMapping asMapping() throws YamlReadingException, ClassCastException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public final YamlSequence asSequence()
-        throws YamlReadingException, ClassCastException {
-        return this.asClass(YamlSequence.class, Node.SEQUENCE);
+    public final YamlSequence asSequence() throws YamlReadingException, ClassCastException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public final YamlStream asStream()
-        throws YamlReadingException, ClassCastException {
-        return this.asClass(YamlStream.class, Node.STREAM);
+    public final YamlStream asStream() throws YamlReadingException, ClassCastException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public final <T extends YamlNode> T asClass(final Class<T> clazz,
-                                                final Node type)
-        throws YamlReadingException, ClassCastException {
-        if (this.type() != type) {
-            throw new YamlReadingException(
-                "The YamlNode is not a " + clazz.getSimpleName() + '!');
-        }
-        return clazz.cast(this);
+    public final <T extends YamlNode> T asClass(final Class<T> clazz, final Node type) throws YamlReadingException, ClassCastException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -110,21 +99,9 @@ abstract class BaseYamlNode implements YamlNode {
      * @return String print of this YamlNode.
      * @throws YamlPrintException If there is any I/O problem
      *  when printing the YAML.
-     *
      */
     @Override
     public final String toString() {
-        final StringWriter writer = new StringWriter();
-        final YamlPrinter printer = new RtYamlPrinter(
-            writer, this.alwaysPrintBlock
-        );
-        try {
-            printer.print(this);
-            return writer.toString();
-        } catch (final IOException ex) {
-            throw new YamlPrintException(
-                "IOException when printing YAML", ex
-            );
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

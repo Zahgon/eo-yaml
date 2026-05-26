@@ -87,32 +87,12 @@ final class SameIndentationLevel implements YamlLines {
      */
     @Override
     public Iterator<YamlLine> iterator() {
-        Iterator<YamlLine> iterator = this.yamlLines.iterator();
-        if (iterator.hasNext()) {
-            final List<YamlLine> sameIndentation = new ArrayList<>();
-            final YamlLine first = iterator.next();
-            sameIndentation.add(first);
-            int firstIndentation = first.indentation();
-            boolean firstIsDashMap = this.mappingStartsAtDash(first);
-            while (iterator.hasNext()) {
-                YamlLine current = iterator.next();
-                if (this.mapping && firstIsDashMap
-                    && current.indentation() == firstIndentation + 2) {
-                    sameIndentation.add(current);
-                } else if(current.indentation() == firstIndentation) {
-                    sameIndentation.add(current);
-                } else if (current.indentation() < firstIndentation) {
-                    break;
-                }
-            }
-            iterator = sameIndentation.iterator();
-        }
-        return iterator;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlNode nextYamlNode(final YamlLine prev) {
-        return this.yamlLines.nextYamlNode(prev);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -123,9 +103,7 @@ final class SameIndentationLevel implements YamlLines {
      */
     private boolean mappingStartsAtDash(final YamlLine dashLine) {
         final String trimmed = dashLine.trimmed();
-        final boolean escapedScalar = trimmed.matches("^\\s*-\\s*\".*\"$")
-            || trimmed.matches("^\\s*-\\s*'.*'$");
+        final boolean escapedScalar = trimmed.matches("^\\s*-\\s*\".*\"$") || trimmed.matches("^\\s*-\\s*'.*'$");
         return trimmed.matches("^\\s*-.*:(\\s.*)?$") && !escapedScalar;
     }
-
 }

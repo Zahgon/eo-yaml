@@ -59,7 +59,7 @@ public interface YamlDump {
      * @return YAML Representation.
      */
     default YamlNode dump() {
-        return this.dump("");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -68,7 +68,7 @@ public interface YamlDump {
      * @return YamlMapping.
      */
     default YamlMapping dumpMapping() {
-        return this.dumpMapping("");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -77,7 +77,7 @@ public interface YamlDump {
      * @return YamlSequence.
      */
     default YamlSequence dumpSequence() {
-        return this.dumpSequence("");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -86,7 +86,7 @@ public interface YamlDump {
      * @return Scalar.
      */
     default Scalar dumpScalar() {
-        return this.dumpScalar("");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -96,7 +96,7 @@ public interface YamlDump {
      * @return YamlMapping.
      */
     default YamlMapping dumpMapping(final String comment) {
-        return (YamlMapping) this.dump(comment);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -106,7 +106,7 @@ public interface YamlDump {
      * @return YamlSequence.
      */
     default YamlSequence dumpSequence(final String comment) {
-        return (YamlSequence) this.dump(comment);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -116,7 +116,6 @@ public interface YamlDump {
      * @return Scalar.
      */
     default Scalar dumpScalar(final String comment) {
-        return (Scalar) this.dump(comment);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

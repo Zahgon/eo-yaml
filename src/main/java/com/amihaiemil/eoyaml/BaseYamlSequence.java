@@ -40,8 +40,7 @@ import java.util.*;
  * @version $Id$
  * @since 4.0.0
  */
-public abstract class BaseYamlSequence
-    extends BaseYamlNode implements YamlSequence {
+public abstract class BaseYamlSequence extends BaseYamlNode implements YamlSequence {
 
     /**
      * Ctor.
@@ -61,16 +60,12 @@ public abstract class BaseYamlSequence
 
     @Override
     public final Node type() {
-        return Node.SEQUENCE;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public final int hashCode() {
-        int hash = 0;
-        for(final YamlNode node : this.values()) {
-            hash += node.hashCode();
-        }
-        return hash;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -81,15 +76,7 @@ public abstract class BaseYamlSequence
      */
     @Override
     public final boolean equals(final Object other) {
-        final boolean result;
-        if (other == null || !(other instanceof YamlSequence)) {
-            result = false;
-        } else if (this == other) {
-            result = true;
-        } else {
-            result = this.compareTo((YamlSequence) other) == 0;
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -114,34 +101,11 @@ public abstract class BaseYamlSequence
      */
     @Override
     public final int compareTo(final YamlNode other) {
-        int result = 0;
-        if (other == null || other instanceof Scalar) {
-            result = 1;
-        } else if (other instanceof YamlMapping) {
-            result = -1;
-        } else if (this != other) {
-            final Collection<YamlNode> nodes = this.values();
-            final Collection<YamlNode> others = ((YamlSequence) other).values();
-            if(nodes.size() > others.size()) {
-                result = 1;
-            } else if (nodes.size() < others.size()) {
-                result = -1;
-            } else {
-                final Iterator<YamlNode> iterator = others.iterator();
-                final Iterator<YamlNode> here = nodes.iterator();
-                while(iterator.hasNext()) {
-                    result = here.next().compareTo(iterator.next());
-                    if(result != 0) {
-                        break;
-                    }
-                }
-            }
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public final boolean isEmpty() {
-        return this.values().isEmpty();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

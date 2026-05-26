@@ -64,6 +64,7 @@ import java.util.List;
  * @since 8.0.0
  */
 final class CollapsedFlowLines implements YamlLines {
+
     /**
      * The flow's opening bracket.
      */
@@ -85,11 +86,7 @@ final class CollapsedFlowLines implements YamlLines {
      * @param openingBracket Opening.
      * @param closingBracket Closing.
      */
-    CollapsedFlowLines(
-        final YamlLines lines,
-        final char openingBracket,
-        final char closingBracket
-    ) {
+    CollapsedFlowLines(final YamlLines lines, final char openingBracket, final char closingBracket) {
         this.lines = lines;
         this.openingBracket = openingBracket;
         this.closingBracket = closingBracket;
@@ -97,56 +94,12 @@ final class CollapsedFlowLines implements YamlLines {
 
     @Override
     public YamlNode nextYamlNode(final YamlLine prev) {
-        return this.lines.nextYamlNode(prev);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Iterator<YamlLine> iterator() {
-        int bracketCount = 0;
-        boolean closedBracketFound = false;
-        final List<YamlLine> collapsed = new ArrayList<>();
-        List<YamlLine> flow = new ArrayList<>();
-        boolean startedQuoteEscape = false;
-        boolean startedApEscape = false;
-        for(final YamlLine line : this.lines) {
-            String text = line.trimmed();
-            for (int i = 0; i < text.length(); i++) {
-                final char currentChar = text.charAt(i);
-                if(currentChar == this.openingBracket
-                    && !startedApEscape && !startedQuoteEscape) {
-                    bracketCount++;
-                } else if(currentChar == this.closingBracket
-                    && !startedApEscape && !startedQuoteEscape) {
-                    bracketCount--;
-                    closedBracketFound = true;
-                }
-                if (isEscapeChar(i, '\"', text) && !startedApEscape) {
-                    startedQuoteEscape = !startedQuoteEscape;
-                } else if (isEscapeChar(i, '\'', text) && !startedQuoteEscape) {
-                    startedApEscape = !startedApEscape;
-                }
-            }
-            if(bracketCount % 2 != 0) {
-                flow.add(line);
-            } else if(bracketCount == 0 && closedBracketFound) {
-                flow.add(line);
-                collapsed.add(new CollapsedYamlLine(flow));
-                flow = new ArrayList<>();
-                closedBracketFound = false;
-            } else {
-                collapsed.add(line);
-            }
-        }
-        
-        if(bracketCount != 0) {
-            throw new IllegalStateException(
-                "Flow YamlNode starting at line "
-                + this.lines.line(0).number()
-                + " not closed. "
-                +"Closing bracket " + this.closingBracket + " not found."
-            );
-        }
-        return collapsed.iterator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -157,9 +110,7 @@ final class CollapsedFlowLines implements YamlLines {
      * @return True if the escape character is found and it is
      *  not preceded by a backslash.
      */
-    private boolean isEscapeChar(
-        final int start, final char escapeChar, final String nodes
-    ) {
+    private boolean isEscapeChar(final int start, final char escapeChar, final String nodes) {
         final boolean result;
         if (nodes.charAt(start) == escapeChar) {
             result = start == 0 || nodes.charAt(start - 1) != '\\';

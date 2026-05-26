@@ -61,22 +61,16 @@ public final class StrictYamlMapping extends BaseYamlMapping {
 
     @Override
     public Set<YamlNode> keys() {
-        return this.decorated.keys();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlNode value(final YamlNode key) {
-        YamlNode found = this.decorated.value(key);
-        if (found == null) {
-            throw new YamlNodeNotFoundException(
-                "No YAML found for key " + key
-            );
-        }
-        return found;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        return this.decorated.comment();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

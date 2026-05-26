@@ -58,85 +58,32 @@ final class RtYamlInput implements YamlInput {
 
     @Override
     public YamlMapping readYamlMapping() throws IOException {
-        final AllYamlLines all = this.readInput();
-        final Iterator<YamlLine> iterator = new Skip(
-            all,
-            line -> line.trimmed().startsWith("#"),
-            line -> line.trimmed().startsWith("---"),
-            line -> line.trimmed().startsWith("..."),
-            line -> line.trimmed().startsWith("%"),
-            line -> line.trimmed().startsWith("!!")
-        ).iterator();
-        final YamlMapping read;
-        if(iterator.hasNext()) {
-            if (iterator.next().trimmed().startsWith("{")) {
-                read = new ReadFlowMapping(all);
-            } else {
-                read = new ReadYamlMapping(all);
-            }
-        } else {
-            read = new EmptyYamlMapping();
-        }
-        return read;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlSequence readYamlSequence() throws IOException {
-        final AllYamlLines all = this.readInput();
-        final Iterator<YamlLine> iterator = new Skip(
-            all,
-            line -> line.trimmed().startsWith("#"),
-            line -> line.trimmed().startsWith("---"),
-            line -> line.trimmed().startsWith("..."),
-            line -> line.trimmed().startsWith("%"),
-            line -> line.trimmed().startsWith("!!")
-        ).iterator();
-        final YamlSequence read;
-        if(iterator.hasNext()) {
-            if (iterator.next().trimmed().startsWith("[")) {
-                read = new ReadFlowSequence(all);
-            } else {
-                read = new ReadYamlSequence(all);
-            }
-        } else {
-            read = new EmptyYamlSequence();
-        }
-        return read;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlStream readYamlStream() throws IOException {
-        return new ReadYamlStream(this.readInput());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Scalar readPlainScalar() throws IOException {
-        final ReadPlainScalar read;
-        final AllYamlLines all = this.readInput();
-        final Iterator<YamlLine> iterator = new Skip(
-            all,
-            line -> line.trimmed().startsWith("#"),
-            line -> line.trimmed().startsWith("---"),
-            line -> line.trimmed().startsWith("..."),
-            line -> line.trimmed().startsWith("%"),
-            line -> line.trimmed().startsWith("!!")
-        ).iterator();
-        if(!iterator.hasNext()) {
-            read = new ReadPlainScalar(all, new YamlLine.NullYamlLine());
-        } else {
-            read = new ReadPlainScalar(all, iterator.next());
-        }
-        return read;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Scalar readFoldedBlockScalar() throws IOException {
-        return new ReadFoldedBlockScalar(this.readInput());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Scalar readLiteralBlockScalar() throws IOException {
-        return new ReadLiteralBlockScalar(this.readInput());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -151,9 +98,7 @@ final class RtYamlInput implements YamlInput {
             String line;
             int number = 0;
             while ((line = reader.readLine()) != null) {
-
                 if (this.mappingOrSequenceStartsAtDash(line)) {
-
                     // if line starts with a sequence ("-") and the first
                     // key:value is unescaped and on the same line with the
                     // sequence marker, then split the line by keeping the "-"
@@ -161,24 +106,13 @@ final class RtYamlInput implements YamlInput {
                     // next line with correct indentation relative to "-".
                     // see bug:
                     // https://github.com/decorators-squad/eo-yaml/issues/447
-
-                    final String seqIndent = Stream.iterate(" ", s -> s)
-                        .limit(new RtYamlLine(line, number).indentation())
-                        .reduce((acc, space) -> acc + space)
-                        .orElse("");
-                    final YamlLine sequenceLine = new RtYamlLine(
-                        seqIndent + "-",
-                        number
-                    );
+                    final String seqIndent = Stream.iterate(" ", s -> s).limit(new RtYamlLine(line, number).indentation()).reduce((acc, space) -> acc + space).orElse("");
+                    final YamlLine sequenceLine = new RtYamlLine(seqIndent + "-", number);
                     lines.add(sequenceLine);
-
                     // 2 spaces offset
                     final String offset = "  ";
                     final String keyValueIndent = seqIndent + offset;
-                    final YamlLine keyValueLine = new RtYamlLine(
-                        keyValueIndent + line.split("-", 2)[1].trim(),
-                        ++number
-                    );
+                    final YamlLine keyValueLine = new RtYamlLine(keyValueIndent + line.split("-", 2)[1].trim(), ++number);
                     if (!keyValueLine.toString().trim().isEmpty()) {
                         lines.add(keyValueLine);
                     }
@@ -206,13 +140,10 @@ final class RtYamlInput implements YamlInput {
      * @param line Line.
      * @return Boolean.
      */
-    private boolean mappingOrSequenceStartsAtDash(final String line){
+    private boolean mappingOrSequenceStartsAtDash(final String line) {
         //line without indentation.
         final String trimmed = line.trim();
-        final boolean escapedScalar = trimmed.matches("^\\s*-\\s*\".*\"$")
-            || trimmed.matches("^\\s*-\\s*'.*'$");
-        return (trimmed.matches("^\\s*-.+:\\s.*$")
-            || trimmed.matches("^\\s*-.+-\\s.*$"))
-            && !escapedScalar;
+        final boolean escapedScalar = trimmed.matches("^\\s*-\\s*\".*\"$") || trimmed.matches("^\\s*-\\s*'.*'$");
+        return (trimmed.matches("^\\s*-.+:\\s.*$") || trimmed.matches("^\\s*-.+-\\s.*$")) && !escapedScalar;
     }
 }

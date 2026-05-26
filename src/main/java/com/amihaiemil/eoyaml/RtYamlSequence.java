@@ -61,24 +61,18 @@ final class RtYamlSequence extends BaseYamlSequence {
      * @param elements Elements of this sequence.
      * @param comment Comment referring to this sequence itself.
      */
-    RtYamlSequence(
-        final Collection<YamlNode> elements,
-        final String comment
-    ) {
+    RtYamlSequence(final Collection<YamlNode> elements, final String comment) {
         this.nodes.addAll(elements);
         this.comment = new BuiltComment(this, comment);
     }
 
     @Override
     public Collection<YamlNode> values() {
-        final List<YamlNode> children = new LinkedList<>();
-        children.addAll(this.nodes);
-        return children;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        return this.comment;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

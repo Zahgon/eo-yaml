@@ -64,33 +64,12 @@ final class Skip implements YamlLines {
 
     @Override
     public Iterator<YamlLine> iterator() {
-        Iterator<YamlLine> iterator = this.yamlLines.iterator();
-        if (iterator.hasNext()) {
-            final List<YamlLine> notSkipped = new ArrayList<>();
-            YamlLine previous = new YamlLine.NullYamlLine();
-            while (iterator.hasNext()) {
-                boolean skip = false;
-                final YamlLine next = iterator.next();
-                final Skip.Line current = new Skip.Line(next, previous);
-                previous = current;
-                for(int idx = 0; idx < this.conditions.length; idx++) {
-                    if(this.conditions[idx].isMet(current)) {
-                        skip = true;
-                        break;
-                    }
-                }
-                if(!skip) {
-                    notSkipped.add(current.unwrap());
-                }
-            }
-            iterator = notSkipped.iterator();
-        }
-        return iterator;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlNode nextYamlNode(final YamlLine prev) {
-        return this.yamlLines.nextYamlNode(prev);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -108,7 +87,6 @@ final class Skip implements YamlLines {
          * @return True or false.
          */
         boolean isMet(final YamlLine line);
-
     }
 
     /**
@@ -162,17 +140,17 @@ final class Skip implements YamlLines {
 
         @Override
         public String value() {
-            return this.current.value();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public int number() {
-            return this.current.number();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public int indentation() {
-            return this.current.indentation();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -180,15 +158,15 @@ final class Skip implements YamlLines {
          * @return YamlLine.
          */
         YamlLine getPrevious() {
-            return this.previous;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
          * Stores a line.
          * @param line A {@link YamlLine}.
          */
-        void store(final YamlLine line){
-            this.stored = line;
+        void store(final YamlLine line) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -196,7 +174,7 @@ final class Skip implements YamlLines {
          * @return YamlLine
          */
         YamlLine getStored() {
-            return this.stored;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**

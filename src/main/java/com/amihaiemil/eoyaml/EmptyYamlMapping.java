@@ -61,32 +61,16 @@ public class EmptyYamlMapping extends BaseYamlMapping {
 
     @Override
     public final Set<YamlNode> keys() {
-        return Collections.emptySet();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public final YamlNode value(final YamlNode key) {
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public final Comment comment() {
-        final Comment comment;
-        if(this.mapping != null) {
-            comment = this.mapping.comment();
-        } else {
-            comment = new Comment() {
-                @Override
-                public YamlNode yamlNode() {
-                    return EmptyYamlMapping.this;
-                }
-
-                @Override
-                public String value() {
-                    return "";
-                }
-            };
-        }
-        return comment;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

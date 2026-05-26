@@ -55,23 +55,6 @@ final class JsonYamlDump implements YamlDump {
 
     @Override
     public YamlNode dump(final String comment) {
-        final YamlNode node;
-        final JsonValue safeValue;
-        if (this.value == null) {
-            safeValue = JsonValue.NULL;
-        } else {
-            safeValue = this.value;
-        }
-        if (safeValue instanceof JsonObject) {
-            node = new JsonYamlMapping((JsonObject) safeValue);
-        } else if (safeValue instanceof JsonArray) {
-            node = new JsonYamlSequence((JsonArray) safeValue);
-        } else {
-            node = new PlainStringScalar(safeValue
-                .toString()
-                .replace("\"", "")
-            );
-        }
-        return node;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

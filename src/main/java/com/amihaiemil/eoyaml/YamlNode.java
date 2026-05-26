@@ -28,7 +28,6 @@
 package com.amihaiemil.eoyaml;
 
 import com.amihaiemil.eoyaml.exceptions.YamlReadingException;
-
 import javax.json.JsonValue;
 import java.util.List;
 
@@ -110,8 +109,7 @@ public interface YamlNode extends Comparable<YamlNode> {
      * @throws ClassCastException   If the node type couldn't
      *  defined correctly.
      */
-    <T extends YamlNode> T asClass(Class<T> clazz, Node type)
-        throws YamlReadingException, ClassCastException;
+    <T extends YamlNode> T asClass(Class<T> clazz, Node type) throws YamlReadingException, ClassCastException;
 
     /**
      * Return the children of this node. If the list is empty, it means it's a
@@ -127,7 +125,7 @@ public interface YamlNode extends Comparable<YamlNode> {
      * @param <T> Type of the result.
      */
     default <T> T accept(YamlVisitor<? extends T> visitor) {
-        return visitor.visitYamlNode(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -135,6 +133,6 @@ public interface YamlNode extends Comparable<YamlNode> {
      * @return JsonValue.
      */
     default JsonValue toJsonValue() {
-        return this.accept(new YamlToJsonVisitor());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

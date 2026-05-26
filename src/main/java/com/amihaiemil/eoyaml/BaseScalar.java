@@ -42,7 +42,7 @@ abstract class BaseScalar extends BaseYamlNode implements Scalar {
 
     @Override
     public final Node type() {
-        return Node.SCALAR;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -52,15 +52,7 @@ abstract class BaseScalar extends BaseYamlNode implements Scalar {
      */
     @Override
     public boolean equals(final Object other) {
-        final boolean result;
-        if (other == null || !(other instanceof Scalar)) {
-            result = false;
-        } else if (this == other) {
-            result = true;
-        } else {
-            result = this.compareTo((Scalar) other) == 0;
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -69,14 +61,7 @@ abstract class BaseScalar extends BaseYamlNode implements Scalar {
      */
     @Override
     public int hashCode() {
-        final int hashCode;
-        final String value = this.value();
-        if(value == null) {
-            hashCode = 0;
-        } else {
-            hashCode = value.hashCode();
-        }
-        return hashCode;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -93,29 +78,11 @@ abstract class BaseScalar extends BaseYamlNode implements Scalar {
      */
     @Override
     public int compareTo(final YamlNode other) {
-        int result = -1;
-        if (this == other) {
-            result = 0;
-        } else if (other == null) {
-            result = 1;
-        } else if (other instanceof Scalar) {
-            final String value = this.value();
-            final String otherVal = ((Scalar) other).value();
-            if(value == null && otherVal == null) {
-                result = 0;
-            } else if(value != null && otherVal == null) {
-                result = 1;
-            } else if (value == null) {
-                result = -1;
-            } else {
-                result = value.compareTo(otherVal);
-            }
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public final boolean isEmpty() {
-        return this.value() == null || this.value().isEmpty();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

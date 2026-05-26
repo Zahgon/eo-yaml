@@ -72,171 +72,45 @@ final class YamlPrintVisitor implements YamlVisitor<String> {
      * @param lineSeparator Line separator.
      * @param alwaysBlock Print each node as block-style always.
      */
-    YamlPrintVisitor(
-        final int indentation,
-        final String lineSeparator,
-        final boolean alwaysBlock
-    ) {
+    YamlPrintVisitor(final int indentation, final String lineSeparator, final boolean alwaysBlock) {
         this.indentation = indentation;
         this.lineSeparator = lineSeparator;
         this.alwaysBlock = alwaysBlock;
     }
+
     @Override
     public String visitYamlMapping(final YamlMapping node) {
-        final StringWriter writer = new StringWriter();
-        final String printed;
-        if((node instanceof ReadFlowMapping
-            || node instanceof JsonYamlMapping)
-            && !this.alwaysBlock) {
-            this.printFlowMapping(node, writer);
-            printed = writer.toString();
-        } else {
-            this.printBlockMapping(node, writer);
-            final String printedMapping = writer.toString();
-            if (printedMapping.length() > 0)  {
-                printed = printedMapping.substring(
-                    0, printedMapping.length() - 1
-                );
-            } else {
-                printed = printedMapping;
-            }
-        }
-        return printed;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String visitYamlSequence(final YamlSequence node) {
-        final StringWriter writer = new StringWriter();
-        final String printed;
-        if((node instanceof ReadFlowSequence
-            || node instanceof JsonYamlSequence)
-            && !this.alwaysBlock) {
-            this.printFlowSequence(node, writer);
-            printed = writer.toString();
-        } else {
-            this.printBlockSequence(node, writer);
-            final String printedSequence = writer.toString();
-            if (printedSequence.length() > 0)  {
-                printed = printedSequence.substring(
-                    0, printedSequence.length() - 1
-                );
-            } else {
-                printed = printedSequence;
-            }
-        }
-        return printed;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String visitScalar(final Scalar node) {
-        final StringWriter writer = new StringWriter();
-        if (node instanceof BaseFoldedScalar) {
-            final BaseFoldedScalar foldedScalar = (BaseFoldedScalar) node;
-            writer.append(">");
-            if(!node.comment().value().isEmpty()) {
-                writer.append(" # ").append(node.comment().value());
-            }
-            writer.append(this.lineSeparator);
-            final List<String> unfolded = foldedScalar.unfolded();
-            for(int idx = 0; idx < unfolded.size(); idx++) {
-                writer.append(
-                    this.indent(
-                        unfolded.get(idx).trim(),
-                        indentation
-                    )
-                );
-                if(idx < unfolded.size() - 1) {
-                    writer.append(this.lineSeparator);
-                }
-            }
-        } else if (node instanceof RtYamlScalarBuilder.BuiltLiteralBlockScalar
-            || node instanceof ReadLiteralBlockScalar
-        ) {
-            writer.append("|");
-            if(!node.comment().value().isEmpty()) {
-                writer.append(" # ").append(node.comment().value());
-            }
-            writer
-                .append(this.lineSeparator)
-                .append(
-                    this.indent(node.value(), indentation)
-                );
-        } else {
-            writer.append(new Escaped(node).value());
-            final Comment comment = node.comment();
-            if (comment instanceof ScalarComment) {
-                final ScalarComment scalarComment = (ScalarComment) comment;
-                if (!scalarComment.inline().value().isEmpty()) {
-                    writer.append(" # ").append(
-                        scalarComment.inline().value()
-                    );
-                }
-            }
-        }
-        return writer.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String visitYamlStream(final YamlStream node) {
-        final StringWriter writer = new StringWriter();
-        node.forEach(
-            yaml -> writer.append("---")
-                        .append(this.lineSeparator)
-                        .append(
-                            this.indent(
-                                this.visitYamlNode(yaml),
-                                this.indentation
-                            )
-                        )
-                        .append(this.lineSeparator)
-        );
-        final String printedStream = writer.toString();
-        final String trimmed;
-        if (printedStream.length() > 0)  {
-            trimmed = printedStream.substring(0, printedStream.length() - 1);
-        } else {
-            trimmed = printedStream;
-        }
-        return trimmed;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String visitYamlNode(final YamlNode node) {
-        final StringWriter writer = new StringWriter();
-        if (node == null || node.isEmpty()) {
-            if (node instanceof YamlSequence) {
-                writer.append("[]");
-            } else if (node instanceof YamlMapping) {
-                writer.append("{}");
-            } else if (node instanceof YamlStream) {
-                writer.append("---" + this.lineSeparator + "...");
-            } else {
-                writer.append("null");
-            }
-        } else {
-            if (node instanceof Scalar) {
-                writer.append(this.visitScalar((Scalar) node));
-            } else if (node instanceof YamlSequence) {
-                writer.append(this.visitYamlSequence((YamlSequence) node));
-            } else if (node instanceof YamlMapping) {
-                writer.append(this.visitYamlMapping((YamlMapping) node));
-            } else if (node instanceof YamlStream) {
-                writer.append(this.visitYamlStream((YamlStream) node));
-            }
-        }
-        return writer.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String defaultResult() {
-        return "";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public String aggregateResult(
-        final String aggregate, final String nextResult
-    ) {
-        return aggregate + nextResult;
+    public String aggregateResult(final String aggregate, final String nextResult) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -254,11 +128,8 @@ final class YamlPrintVisitor implements YamlVisitor<String> {
         }
         final String[] lines = print.split(this.lineSeparator);
         final StringWriter indented = new StringWriter();
-        for(final String line : lines) {
-            indented
-                .append(indent.toString())
-                .append(line)
-                .append(this.lineSeparator);
+        for (final String line : lines) {
+            indented.append(indent.toString()).append(line).append(this.lineSeparator);
         }
         final String str = indented.toString();
         return str.substring(0, str.length() - 1);
@@ -273,9 +144,9 @@ final class YamlPrintVisitor implements YamlVisitor<String> {
      */
     private String printPossibleComment(final YamlNode node) {
         final StringWriter writer = new StringWriter();
-        if(node != null && node.comment() != null) {
+        if (node != null && node.comment() != null) {
             final Comment tmpComment;
-            if(node.comment() instanceof ScalarComment) {
+            if (node.comment() instanceof ScalarComment) {
                 tmpComment = ((ScalarComment) node.comment()).above();
             } else {
                 tmpComment = node.comment();
@@ -284,10 +155,7 @@ final class YamlPrintVisitor implements YamlVisitor<String> {
             if (com.trim().length() != 0) {
                 String[] lines = com.split(this.lineSeparator);
                 for (final String line : lines) {
-                    writer
-                        .append("# ")
-                        .append(line)
-                        .append(this.lineSeparator);
+                    writer.append("# ").append(line).append(this.lineSeparator);
                 }
             }
         }
@@ -299,13 +167,11 @@ final class YamlPrintVisitor implements YamlVisitor<String> {
      * @param node Block YamlMapping to print.
      * @param writer String writer.
      */
-    private void printBlockMapping(
-        final YamlMapping node, final StringWriter writer
-    ) {
+    private void printBlockMapping(final YamlMapping node, final StringWriter writer) {
         for (final YamlNode key : node.keys()) {
             final YamlNode value = node.value(key);
             writer.append(this.printPossibleComment(value));
-            if(key.type().equals(Node.SCALAR)) {
+            if (key.type().equals(Node.SCALAR)) {
                 writer.append(this.visitYamlNode(key));
             } else {
                 writer.append("?").append(this.lineSeparator);
@@ -313,14 +179,12 @@ final class YamlPrintVisitor implements YamlVisitor<String> {
                 writer.append(this.indent(printedValue, this.indentation));
                 writer.append(this.lineSeparator);
             }
-            if(value == null || value.type().equals(Node.SCALAR)) {
+            if (value == null || value.type().equals(Node.SCALAR)) {
                 writer.append(": ");
                 writer.append(this.visitYamlNode(value));
             } else {
                 final String printedValue = this.visitYamlNode(value);
-                if("null".equals(printedValue) || printedValue.startsWith("[")
-                    || printedValue.startsWith("{")
-                ) {
+                if ("null".equals(printedValue) || printedValue.startsWith("[") || printedValue.startsWith("{")) {
                     writer.append(": ");
                     writer.append(printedValue);
                 } else {
@@ -338,11 +202,9 @@ final class YamlPrintVisitor implements YamlVisitor<String> {
      * @param node Flow YamlMapping to print.
      * @param writer String writer.
      */
-    private void printFlowMapping(
-        final YamlMapping node, final StringWriter writer
-    ) {
+    private void printFlowMapping(final YamlMapping node, final StringWriter writer) {
         writer.append("{");
-        int i=0;
+        int i = 0;
         final Set<YamlNode> keys = node.keys();
         for (final YamlNode key : keys) {
             final YamlNode value = node.value(key);
@@ -350,7 +212,7 @@ final class YamlPrintVisitor implements YamlVisitor<String> {
             writer.append(": ");
             writer.append(this.visitYamlNode(value));
             i++;
-            if(i<keys.size()) {
+            if (i < keys.size()) {
                 writer.append(", ");
             }
         }
@@ -362,19 +224,15 @@ final class YamlPrintVisitor implements YamlVisitor<String> {
      * @param node Block YamlSequence to print.
      * @param writer String writer.
      */
-    private void printBlockSequence(
-        final YamlSequence node, final StringWriter writer
-    ) {
-        for(final YamlNode value : node.values()) {
+    private void printBlockSequence(final YamlSequence node, final StringWriter writer) {
+        for (final YamlNode value : node.values()) {
             writer.append(this.printPossibleComment(value));
-            if(value == null || value.type().equals(Node.SCALAR)) {
+            if (value == null || value.type().equals(Node.SCALAR)) {
                 writer.append("- ");
                 writer.append(this.visitYamlNode(value));
             } else {
                 final String printedValue = this.visitYamlNode(value);
-                if("null".equals(printedValue) || printedValue.startsWith("[")
-                    || printedValue.startsWith("{")
-                ) {
+                if ("null".equals(printedValue) || printedValue.startsWith("[") || printedValue.startsWith("{")) {
                     writer.append("- ");
                     writer.append(printedValue);
                 } else {
@@ -392,16 +250,14 @@ final class YamlPrintVisitor implements YamlVisitor<String> {
      * @param node Flow YamlSequence to print.
      * @param writer String writer.
      */
-    private void printFlowSequence(
-        final YamlSequence node, final StringWriter writer
-    ) {
+    private void printFlowSequence(final YamlSequence node, final StringWriter writer) {
         writer.append("[");
-        int i=0;
+        int i = 0;
         final Collection<YamlNode> values = node.values();
         for (final YamlNode value : values) {
             writer.append(this.visitYamlNode(value));
             i++;
-            if(i<values.size()) {
+            if (i < values.size()) {
                 writer.append(", ");
             }
         }
@@ -432,28 +288,12 @@ final class YamlPrintVisitor implements YamlVisitor<String> {
 
         @Override
         public String value() {
-            final String value = this.original.value();
-            String toEscape;
-            if(value == null) {
-                toEscape = "null";
-            } else {
-                toEscape = value;
-            }
-            boolean alreadyEscaped = (toEscape.startsWith("'") && toEscape.endsWith("'"))
-                || (toEscape.startsWith("\"") && toEscape.endsWith("\""));
-            if (!alreadyEscaped && this.needsEscaping(toEscape)) {
-                if(toEscape.contains("\"")) {
-                    toEscape = "'" + toEscape + "'";
-                } else {
-                    toEscape = "\"" + toEscape + "\"";
-                }
-            }
-            return toEscape;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Comment comment() {
-            return this.original.comment();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -463,23 +303,7 @@ final class YamlPrintVisitor implements YamlVisitor<String> {
          * @checkstyle ReturnCount (100 lines)
          */
         public boolean needsEscaping(final String value) {
-            final String flowMap = "^\\{.*\\}$";
-            final String flowSequence = "^\\[.*\\]$";
-            final String blockSequence = "[ ]*\\-+.*";
-            final String isNullRef = "null";
-            final String justSpaces = "[ ]+";
-            final String spaceAfterColon = "(.*:[\\s]+.*)|(^:.*$)";
-            final String otherSpecialChars = ".*[?#>|%&@`!*,'\"]+.*";
-            final List<String> cases = Arrays.asList(
-                flowMap, flowSequence, blockSequence,
-                isNullRef, justSpaces, spaceAfterColon, otherSpecialChars
-            );
-            for(final String regex : cases) {
-                if(value.matches(regex)) {
-                    return true;
-                }
-            }
-            return false;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

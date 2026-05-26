@@ -54,7 +54,7 @@ public interface YamlScalarBuilder {
      * @return The built Scalar.
      */
     default Scalar buildPlainScalar() {
-        return this.buildPlainScalar("");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -74,7 +74,7 @@ public interface YamlScalarBuilder {
      * @return The built Scalar.
      */
     default Scalar buildFoldedBlockScalar() {
-        return this.buildFoldedBlockScalar("");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -84,7 +84,7 @@ public interface YamlScalarBuilder {
      * @return The built Scalar.
      */
     default Scalar buildLiteralBlockScalar() {
-        return this.buildLiteralBlockScalar("");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -97,7 +97,7 @@ public interface YamlScalarBuilder {
      * @return The built Scalar.
      */
     default Scalar buildPlainScalar(final String inline) {
-        return this.buildPlainScalar("", inline);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -110,11 +110,8 @@ public interface YamlScalarBuilder {
      *  more lines, they will be concatenated into a single line.
      * @return The built Scalar.
      */
-    default Scalar buildPlainScalar(
-        final Collection<String> above, final String inline) {
-        return this.buildPlainScalar(
-            String.join(System.lineSeparator(), above), inline
-        );
+    default Scalar buildPlainScalar(final Collection<String> above, final String inline) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -154,5 +151,4 @@ public interface YamlScalarBuilder {
      * @return The built Scalar.
      */
     Scalar buildLiteralBlockScalar(final String comment);
-
 }

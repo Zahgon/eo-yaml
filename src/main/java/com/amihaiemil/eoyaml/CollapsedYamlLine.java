@@ -53,35 +53,21 @@ final class CollapsedYamlLine implements YamlLine {
 
     @Override
     public String value() {
-        return this.lines.stream()
-            .map(YamlLine::value)
-            .collect(Collectors.joining(" "));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int number() {
-        final int number;
-        if(this.lines.isEmpty()) {
-            number = -1;
-        } else {
-            number = this.lines.get(0).number();
-        }
-        return number;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int indentation() {
-        final int indentation;
-        if(this.lines.isEmpty()) {
-            indentation = -1;
-        } else {
-            indentation = this.lines.get(0).indentation();
-        }
-        return indentation;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        return this.value();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

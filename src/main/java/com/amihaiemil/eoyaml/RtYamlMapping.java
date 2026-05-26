@@ -46,8 +46,7 @@ final class RtYamlMapping extends BaseYamlMapping {
     /**
      * Key:value linked map (maintains the order of insertion).
      */
-    private final Map<YamlNode, YamlNode> mappings =
-        new LinkedHashMap<>();
+    private final Map<YamlNode, YamlNode> mappings = new LinkedHashMap<>();
 
     /**
      * Ctor.
@@ -62,29 +61,23 @@ final class RtYamlMapping extends BaseYamlMapping {
      * @param entries Entries contained in this mapping.
      * @param comment Comment on top of this YamlMapping.
      */
-    RtYamlMapping(
-        final Map<YamlNode, YamlNode> entries,
-        final String comment
-    ) {
+    RtYamlMapping(final Map<YamlNode, YamlNode> entries, final String comment) {
         this.mappings.putAll(entries);
         this.comment = new BuiltComment(this, comment);
     }
 
     @Override
     public Set<YamlNode> keys() {
-        final Set<YamlNode> keys = new LinkedHashSet<>();
-        keys.addAll(this.mappings.keySet());
-        return keys;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlNode value(final YamlNode key) {
-        return this.mappings.get(key);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        return this.comment;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

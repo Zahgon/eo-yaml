@@ -44,14 +44,15 @@ public final class Yaml {
     /**
      * Hidden ctor.
      */
-    private Yaml(){}
+    private Yaml() {
+    }
 
     /**
      * Create an immutable, thread-safe, {@link YamlMappingBuilder}.
      * @return Builder of YamlMapping.
      */
     public static YamlMappingBuilder createYamlMappingBuilder() {
-        return new RtYamlMappingBuilder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -59,7 +60,7 @@ public final class Yaml {
      * @return Builder of YamlMapping.
      */
     public static YamlMappingBuilder createMutableYamlMappingBuilder() {
-        return new MutableYamlMappingBuilder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -67,7 +68,7 @@ public final class Yaml {
      * @return Builder of YamlMapping.
      */
     public static YamlSequenceBuilder createYamlSequenceBuilder() {
-        return new RtYamlSequenceBuilder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -75,7 +76,7 @@ public final class Yaml {
      * @return Builder of YamlMapping.
      */
     public static YamlSequenceBuilder createMutableYamlSequenceBuilder() {
-        return new MutableYamlSequenceBuilder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -83,7 +84,7 @@ public final class Yaml {
      * @return Builder of Yaml Scalars.
      */
     public static YamlScalarBuilder createYamlScalarBuilder() {
-        return new RtYamlScalarBuilder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -91,7 +92,7 @@ public final class Yaml {
      * @return Builder of YamlStream.
      */
     public static YamlStreamBuilder createYamlStreamBuilder() {
-        return new RtYamlStreamBuilder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -100,10 +101,8 @@ public final class Yaml {
      * @param input File to read from
      * @throws FileNotFoundException If the file is not found.
      */
-    public static YamlInput createYamlInput(
-        final File input
-    ) throws FileNotFoundException {
-        return Yaml.createYamlInput(new FileReader(input));
+    public static YamlInput createYamlInput(final File input) throws FileNotFoundException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -112,7 +111,7 @@ public final class Yaml {
      * @return YamlInput, reader of Yaml.
      */
     public static YamlInput createYamlInput(final String input) {
-        return Yaml.createYamlInput(new StringReader(input));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -121,7 +120,7 @@ public final class Yaml {
      * @return YamlInput, reader of Yaml.
      */
     public static YamlInput createYamlInput(final InputStream input) {
-        return new RtYamlInput(new InputStreamReader(input));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -130,7 +129,7 @@ public final class Yaml {
      * @return YamlInput, reader of Yaml.
      */
     public static YamlInput createYamlInput(final Reader input) {
-        return new RtYamlInput(input);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -147,7 +146,7 @@ public final class Yaml {
      * @return YamlPrinter.
      */
     public static YamlPrinter createYamlPrinter(final Writer destination) {
-        return Yaml.createYamlPrinter(destination, System.lineSeparator());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -164,10 +163,8 @@ public final class Yaml {
      * @param lineSeparator Line separator.
      * @return YamlPrinter.
      */
-    public static YamlPrinter createYamlPrinter(
-        final Writer destination, final String lineSeparator
-    ) {
-        return new RtYamlPrinter(destination, lineSeparator);
+    public static YamlPrinter createYamlPrinter(final Writer destination, final String lineSeparator) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -176,7 +173,7 @@ public final class Yaml {
      * @return YamlDump.
      */
     public static YamlDump createYamlDump(final Object object) {
-        return new ReflectedYamlDump(object);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -185,7 +182,7 @@ public final class Yaml {
      * @return YamlMapping.
      */
     public static YamlMapping fromJsonObject(final JsonObject object) {
-        return new JsonYamlMapping(object);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -193,7 +190,7 @@ public final class Yaml {
      * @param array JsonArray in question.
      * @return YamlSequence.
      */
-    public static YamlSequence fromJsonArray(final JsonArray array){
-        return new JsonYamlSequence(array);
+    public static YamlSequence fromJsonArray(final JsonArray array) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -86,40 +86,15 @@ final class RtYamlPrinter implements YamlPrinter {
      * @param lineSeparator Line separator.
      * @param alwaysBlock Print all the nodes in block-style.
      */
-    RtYamlPrinter(
-        final Writer writer,
-        final String lineSeparator,
-        final boolean alwaysBlock
-    ) {
+    RtYamlPrinter(final Writer writer, final String lineSeparator, final boolean alwaysBlock) {
         this.writer = writer;
         this.lineSeparator = lineSeparator;
         this.alwaysBlock = alwaysBlock;
     }
 
     @Override
-    public void print(final YamlNode node) throws IOException  {
-        try {
-            final YamlVisitor<String> visitor = new YamlPrintVisitor(
-                this.lineSeparator, this.alwaysBlock
-            );
-            if (node.type().equals(Node.SCALAR)) {
-                this.writer.append("---")
-                    .append(this.lineSeparator)
-                    .append(printPossibleComment(node))
-                    .append(node.accept(visitor))
-                    .append(this.lineSeparator)
-                    .append("...");
-            } else {
-                final String comment = printPossibleComment(node);
-                this.writer.append(comment);
-                if (!comment.isEmpty()) {
-                    this.writer.append("---").append(this.lineSeparator);
-                }
-                this.writer.append(node.accept(visitor));
-            }
-        } finally {
-            this.writer.close();
-        }
+    public void print(final YamlNode node) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -131,9 +106,9 @@ final class RtYamlPrinter implements YamlPrinter {
      */
     private String printPossibleComment(final YamlNode node) {
         final StringWriter wrtr = new StringWriter();
-        if(node != null && node.comment() != null) {
+        if (node != null && node.comment() != null) {
             final Comment tmpComment;
-            if(node.comment() instanceof ScalarComment) {
+            if (node.comment() instanceof ScalarComment) {
                 tmpComment = ((ScalarComment) node.comment()).above();
             } else {
                 tmpComment = node.comment();
@@ -142,10 +117,7 @@ final class RtYamlPrinter implements YamlPrinter {
             if (com.trim().length() != 0) {
                 String[] lines = com.split(this.lineSeparator);
                 for (final String line : lines) {
-                    wrtr
-                        .append("# ")
-                        .append(line)
-                        .append(this.lineSeparator);
+                    wrtr.append("# ").append(line).append(this.lineSeparator);
                 }
             }
         }

@@ -50,7 +50,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
 
     @Override
     default List<YamlNode> children() {
-        return new ArrayList<>(this.values());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -59,7 +59,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      * @return Iterator of YamlNode.
      */
     default Iterator<YamlNode> iterator() {
-        return this.values().iterator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -68,7 +68,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      * @return Integer.
      */
     default int size() {
-        return this.values().size();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -77,16 +77,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      * @return The Yaml node at index, or null if index is out of bounds.
      */
     default YamlNode yamlNode(final int index) {
-        YamlNode result = null;
-        int count = 0;
-        for (final YamlNode node : this.values()) {
-            if (count == index) {
-                result = node;
-                break;
-            }
-            count++;
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -96,12 +87,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      *  mapping
      */
     default YamlMapping yamlMapping(final int index) {
-        YamlMapping mapping = null;
-        YamlNode node = this.yamlNode(index);
-        if (node instanceof YamlMapping) {
-            mapping = (YamlMapping) node;
-        }
-        return mapping;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -111,12 +97,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      *  sequence
      */
     default YamlSequence yamlSequence(final int index) {
-        YamlSequence sequence = null;
-        YamlNode node = this.yamlNode(index);
-        if (node instanceof YamlSequence) {
-            sequence = (YamlSequence) node;
-        }
-        return sequence;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -125,12 +106,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      * @return The String at index, or null if the node is not a string.
      */
     default String string(final int index) {
-        String string = null;
-        YamlNode node = this.yamlNode(index);
-        if (node instanceof Scalar) {
-            string = ((Scalar) node).value();
-        }
-        return string;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -140,7 +116,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      *   is not a scalar.
      */
     default String foldedBlockScalar(final int index) {
-        return this.string(index);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -150,12 +126,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      *   node is not a scalar.
      */
     default Collection<String> literalBlockScalar(final int index) {
-        Collection<String> lines = null;
-        String nodetext = this.string(index);
-        if (nodetext != null) {
-            lines = Arrays.asList(nodetext.split(System.lineSeparator()));
-        }
-        return lines;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -170,11 +141,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      * @throws NumberFormatException - if the node is not a parsable integer.
      */
     default int integer(final int index) {
-        final String value = this.string(index);
-        if(value == null || value.isEmpty()) {
-            throw new NumberFormatException();
-        }
-        return Integer.parseInt(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -189,11 +156,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      * @throws NumberFormatException - if the node is not a parsable float.
      */
     default float floatNumber(final int index) {
-        final String value = this.string(index);
-        if(value == null || value.isEmpty()) {
-            throw new NumberFormatException();
-        }
-        return Float.parseFloat(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -208,11 +171,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      * @throws NumberFormatException - if the node is not a parsable double.
      */
     default double doubleNumber(final int index) {
-        final String value = this.string(index);
-        if(value == null || value.isEmpty()) {
-            throw new NumberFormatException();
-        }
-        return Double.parseDouble(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -227,11 +186,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      * @throws NumberFormatException - if the node is not a parsable long.
      */
     default long longNumber(final int index) {
-        final String value = this.string(index);
-        if(value == null || value.isEmpty()) {
-            throw new NumberFormatException();
-        }
-        return Long.parseLong(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -247,12 +202,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      * @throws DateTimeParseException - if the Scalar value cannot be parsed.
      */
     default LocalDate date(final int index) {
-        LocalDate date = null;
-        final String value = this.string(index);
-        if(value != null && !value.isEmpty()) {
-            date = LocalDate.parse(value);
-        }
-        return date;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -268,12 +218,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      * @throws DateTimeParseException - if the Scalar value cannot be parsed.
      */
     default LocalDateTime dateTime(final int index) {
-        LocalDateTime datetime = null;
-        final String value = this.string(index);
-        if(value != null && !value.isEmpty()) {
-            datetime = LocalDateTime.parse(value);
-        }
-        return datetime;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -288,7 +233,7 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      * @return Boolean.
      */
     default boolean bool(final int index) {
-        return Boolean.parseBoolean(this.string(index));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -296,6 +241,6 @@ public interface YamlSequence extends YamlNode, Iterable<YamlNode> {
      * @return JsonArray.
      */
     default JsonArray toJsonArray() {
-        return (JsonArray) this.accept(new YamlToJsonVisitor());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

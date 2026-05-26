@@ -56,17 +56,7 @@ final class ReadPlainScalar extends BaseScalar {
      * The sequence scalar (<b>UnescapedSequenceScalar</b>) is:
      *   - -[ ]+(.*) : Any characters after a hyphen (-) and one more spaces.
      */
-    private static final Pattern QUOTED_LITERAL_MAP_SEQ = Pattern.compile("^("
-        + "[ ]*(-[ ]+)"
-        + "(?<EscapedScalar>"
-            + "('(?:[^'\\\\]|\\\\.)*')|"
-            + "(\"(?:[^\"\\\\]|\\\\.)*\")"
-        + ")|"
-        + "(((?<key>[^:'\"]+)|(?<keyQ>\".+\")|(?<keySQ>'.+'))*:[ ]+"
-        + "(?<MappingScalar>.*))|"
-        + "(-[ ]+(?<UnescapedSequenceScalar>.*))"
-        + ")$"
-    );
+    private static final Pattern QUOTED_LITERAL_MAP_SEQ = Pattern.compile("^(" + "[ ]*(-[ ]+)" + "(?<EscapedScalar>" + "('(?:[^'\\\\]|\\\\.)*')|" + "(\"(?:[^\"\\\\]|\\\\.)*\")" + ")|" + "(((?<key>[^:'\"]+)|(?<keyQ>\".+\")|(?<keySQ>'.+'))*:[ ]+" + "(?<MappingScalar>.*))|" + "(-[ ]+(?<UnescapedSequenceScalar>.*))" + ")$");
 
     /**
      * Name of the regex group for escaped scalars (between "" or '').
@@ -81,8 +71,7 @@ final class ReadPlainScalar extends BaseScalar {
     /**
      * Name of the regex group for unescaped scalars in a sequence.
      */
-    private static final String UNESCAPED_SEQUENCE_SCALAR =
-        "UnescapedSequenceScalar";
+    private static final String UNESCAPED_SEQUENCE_SCALAR = "UnescapedSequenceScalar";
 
     /**
      * All YAML Lines of the document.
@@ -117,62 +106,12 @@ final class ReadPlainScalar extends BaseScalar {
      */
     @Override
     public String value() {
-        String value = this.scalar.trimmed();
-        Matcher matcher = this.escapedSequenceScalar(this.scalar);
-        if(matcher.matches()) {
-            if (matcher.group(ESCAPED_SCALAR) != null) {
-                value = matcher.group(ESCAPED_SCALAR);
-            } else if (matcher.group(MAPPING_SCALAR) != null) {
-                value = matcher.group(MAPPING_SCALAR).trim();
-            } else if (matcher.group(UNESCAPED_SEQUENCE_SCALAR) != null) {
-                value = matcher.group(UNESCAPED_SEQUENCE_SCALAR).trim();
-            }
-        }
-        if("null".equals(value)) {
-            return null;
-        } else {
-            return this.unescape(value);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        final Comment comment;
-        if(this.scalar instanceof YamlLine.NullYamlLine) {
-            comment = new Concatenated(
-                new BuiltComment(this, ""),
-                new BuiltComment(this, "")
-            );
-        } else {
-            final int lineNumber = this.scalar.number();
-            comment = new Concatenated(
-                new ReadComment(
-                    new Backwards(
-                        new FirstCommentFound(
-                            new Backwards(
-                                new Skip(
-                                    this.all,
-                                    line -> line.number() >= lineNumber,
-                                    line -> line.trimmed().startsWith("..."),
-                                    line -> line.trimmed().startsWith("%"),
-                                    line -> line.trimmed().startsWith("!!")
-                                )
-                            ),
-                            false
-                        )
-                    ),
-                    this
-                ),
-                new ReadComment(
-                    new Skip(
-                        this.all,
-                        line -> line.number() != lineNumber
-                    ),
-                    this
-                )
-            );
-        }
-        return comment;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -183,7 +122,7 @@ final class ReadPlainScalar extends BaseScalar {
      */
     private String unescape(final String value) {
         final String unescaped;
-        if(value == null) {
+        if (value == null) {
             unescaped = value;
         } else {
             if (value.startsWith("\"") && value.endsWith("\"")) {

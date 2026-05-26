@@ -64,42 +64,24 @@ final class ReflectedYamlSequence extends BaseYamlSequence {
      * @param comment String comment referring to this sequence.
      */
     ReflectedYamlSequence(final Object sequence, final String comment) {
-        if(sequence instanceof Collection) {
+        if (sequence instanceof Collection) {
             this.sequence = (Collection<Object>) sequence;
-        } else if(sequence.getClass().isArray()) {
+        } else if (sequence.getClass().isArray()) {
             final Object[] array = (Object[]) sequence;
             this.sequence = Arrays.asList(array);
         } else {
-            throw new IllegalArgumentException(
-                "YamlSequence can only be reflected "
-                    + "from a Collection or from an array."
-            );
+            throw new IllegalArgumentException("YamlSequence can only be reflected " + "from a Collection or from an array.");
         }
         this.comment = comment;
     }
 
     @Override
     public Collection<YamlNode> values() {
-        final List<YamlNode> values = new ArrayList<>();
-        for(final Object value : this.sequence) {
-            values.add(Yaml.createYamlDump(value).dump());
-        }
-        return values;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        return new Comment() {
-            @Override
-            public YamlNode yamlNode() {
-                return ReflectedYamlSequence.this;
-            }
-
-            @Override
-            public String value() {
-                return ReflectedYamlSequence.this.comment;
-            }
-        };
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

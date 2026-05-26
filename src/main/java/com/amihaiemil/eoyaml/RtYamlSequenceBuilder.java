@@ -38,6 +38,7 @@ import java.util.List;
  * @since 1.0.0
  */
 final class RtYamlSequenceBuilder implements YamlSequenceBuilder {
+
     /**
      * Added nodes.
      */
@@ -60,19 +61,16 @@ final class RtYamlSequenceBuilder implements YamlSequenceBuilder {
 
     @Override
     public YamlSequenceBuilder add(final String value) {
-        return this.add(new PlainStringScalar(value));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlSequenceBuilder add(final YamlNode node) {
-        final List<YamlNode> list = new LinkedList<>();
-        list.addAll(this.nodes);
-        list.add(node);
-        return new RtYamlSequenceBuilder(list);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlSequence build(final String comment) {
-        return new RtYamlSequence(this.nodes, comment);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

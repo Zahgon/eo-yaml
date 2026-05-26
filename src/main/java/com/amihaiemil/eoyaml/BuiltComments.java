@@ -57,21 +57,11 @@ final class BuiltComments implements Comments {
 
     @Override
     public Iterator<Comment> iterator() {
-        return this.comments.iterator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment referringTo(final YamlNode node) {
-        Comment found = null;
-        for(final Comment comment : this.comments) {
-            if(comment.yamlNode().equals(node)) {
-                found = comment;
-                break;
-            }
-        }
-        if(found == null) {
-            found = new BuiltComment(node, "");
-        }
-        return found;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

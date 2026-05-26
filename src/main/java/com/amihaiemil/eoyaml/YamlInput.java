@@ -106,13 +106,6 @@ public interface YamlInput {
      * @throws IOException If something goes wrong.
      */
     default YamlNode readYamlNode() throws IOException {
-        final YamlNode document;
-        final YamlStream stream = this.readYamlStream();
-        if(stream.values().size() == 1) {
-            document = stream.iterator().next();
-        } else {
-            document = stream;
-        }
-        return document;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

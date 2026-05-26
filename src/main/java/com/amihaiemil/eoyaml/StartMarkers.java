@@ -50,7 +50,7 @@ final class StartMarkers implements YamlLines {
      * Constructor.
      * @param yamlLines The YAML Lines.
      */
-    StartMarkers(final YamlLines yamlLines){
+    StartMarkers(final YamlLines yamlLines) {
         this.yamlLines = yamlLines;
     }
 
@@ -75,29 +75,11 @@ final class StartMarkers implements YamlLines {
      */
     @Override
     public Iterator<YamlLine> iterator() {
-        Iterator<YamlLine> iterator = this.yamlLines.iterator();
-        if (iterator.hasNext()) {
-            final List<YamlLine> docsStart = new ArrayList<>();
-            final YamlLine first = iterator.next();
-            if("---".equals(first.trimmed())) {
-                docsStart.add(first);
-            } else {
-                docsStart.add(new YamlLine.NullYamlLine());
-            }
-            while (iterator.hasNext()) {
-                final YamlLine current = iterator.next();
-                final String currentLine = current.trimmed();
-                if ("---".equals(currentLine)) {
-                    docsStart.add(current);
-                }
-            }
-            iterator = docsStart.iterator();
-        }
-        return iterator;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlNode nextYamlNode(final YamlLine prev) {
-        return this.yamlLines.nextYamlNode(prev);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

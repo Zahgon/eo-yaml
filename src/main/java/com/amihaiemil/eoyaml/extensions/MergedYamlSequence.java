@@ -28,7 +28,6 @@
 package com.amihaiemil.eoyaml.extensions;
 
 import com.amihaiemil.eoyaml.*;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.function.Supplier;
@@ -56,6 +55,7 @@ import java.util.function.Supplier;
  * @since 4.1.0
  */
 public final class MergedYamlSequence extends BaseYamlSequence {
+
     /**
      * The merged YamlSequence.
      */
@@ -67,10 +67,7 @@ public final class MergedYamlSequence extends BaseYamlSequence {
      * @param original YamlSequence in which the changes will be merged.
      * @param changed YamlSequence containing the differences.
      */
-    public MergedYamlSequence(
-        final YamlSequence original,
-        final YamlSequence changed
-    ) {
+    public MergedYamlSequence(final YamlSequence original, final YamlSequence changed) {
         this(original, changed, false);
     }
 
@@ -80,10 +77,7 @@ public final class MergedYamlSequence extends BaseYamlSequence {
      * @param original YamlSequence in which the changes will be merged.
      * @param changed Supplier of YamlSequence containing the differences.
      */
-    public MergedYamlSequence(
-        final YamlSequence original,
-        final Supplier<YamlSequence> changed
-    ) {
+    public MergedYamlSequence(final YamlSequence original, final Supplier<YamlSequence> changed) {
         this(original, changed, false);
     }
 
@@ -94,11 +88,7 @@ public final class MergedYamlSequence extends BaseYamlSequence {
      * @param changed YamlSequence containing the differences.
      * @param overrideIndices Override existing indices or not?
      */
-    public MergedYamlSequence(
-        final YamlSequence original,
-        final Supplier<YamlSequence> changed,
-        final boolean overrideIndices
-    ) {
+    public MergedYamlSequence(final YamlSequence original, final Supplier<YamlSequence> changed, final boolean overrideIndices) {
         this(original, changed.get(), overrideIndices);
     }
 
@@ -109,15 +99,9 @@ public final class MergedYamlSequence extends BaseYamlSequence {
      * @param changed YamlMapping containing the differences.
      * @param overrideIndices Override existing indices or not?
      */
-    public MergedYamlSequence(
-        final YamlSequence original,
-        final YamlSequence changed,
-        final boolean overrideIndices
-    ) {
-        if(original == null && changed == null) {
-            throw new IllegalArgumentException(
-                "Both sequences cannot be null!"
-            );
+    public MergedYamlSequence(final YamlSequence original, final YamlSequence changed, final boolean overrideIndices) {
+        if (original == null && changed == null) {
+            throw new IllegalArgumentException("Both sequences cannot be null!");
         } else {
             this.merged = merge(original, changed, overrideIndices);
         }
@@ -125,12 +109,12 @@ public final class MergedYamlSequence extends BaseYamlSequence {
 
     @Override
     public Collection<YamlNode> values() {
-        return this.merged.values();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        return this.merged.comment();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -143,32 +127,27 @@ public final class MergedYamlSequence extends BaseYamlSequence {
      * @param overrideIndices Should the existing indices be overriden
      *  or not?
      */
-    private static YamlSequence merge(
-        final YamlSequence original,
-        final YamlSequence changed,
-        final boolean overrideIndices
-    ) {
+    private static YamlSequence merge(final YamlSequence original, final YamlSequence changed, final boolean overrideIndices) {
         final YamlSequence merged;
-        if(original == null || original.size() == 0) {
+        if (original == null || original.size() == 0) {
             merged = changed;
         } else if (changed == null || changed.size() == 0) {
             merged = original;
         } else {
-            if(overrideIndices) {
+            if (overrideIndices) {
                 if (changed.size() >= original.size()) {
                     merged = changed;
                 } else {
-                    YamlSequenceBuilder builder = Yaml
-                        .createYamlSequenceBuilder();
+                    YamlSequenceBuilder builder = Yaml.createYamlSequenceBuilder();
                     int continueFrom = -1;
-                    for(final YamlNode node : changed) {
+                    for (final YamlNode node : changed) {
                         builder = builder.add(node);
                         continueFrom++;
                     }
                     final Iterator<YamlNode> originalIt = original.iterator();
                     int originalIdx = -1;
-                    while(originalIt.hasNext()) {
-                        if(originalIdx >= continueFrom) {
+                    while (originalIt.hasNext()) {
+                        if (originalIdx >= continueFrom) {
                             builder = builder.add(originalIt.next());
                         } else {
                             originalIt.next();
@@ -178,12 +157,11 @@ public final class MergedYamlSequence extends BaseYamlSequence {
                     merged = builder.build();
                 }
             } else {
-                YamlSequenceBuilder builder = Yaml
-                    .createYamlSequenceBuilder();
-                for(final YamlNode node : original) {
+                YamlSequenceBuilder builder = Yaml.createYamlSequenceBuilder();
+                for (final YamlNode node : original) {
                     builder = builder.add(node);
                 }
-                for(final YamlNode node : changed) {
+                for (final YamlNode node : changed) {
                     builder = builder.add(node);
                 }
                 merged = builder.build();

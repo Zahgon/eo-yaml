@@ -65,27 +65,11 @@ final class ReflectedYamlScalar extends BaseScalar {
 
     @Override
     public String value() {
-        final String value;
-        if(this.scalar == null) {
-            value = null;
-        } else {
-            value = String.valueOf(scalar);
-        }
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        return new Comment() {
-            @Override
-            public YamlNode yamlNode() {
-                return ReflectedYamlScalar.this;
-            }
-
-            @Override
-            public String value() {
-                return ReflectedYamlScalar.this.comment;
-            }
-        };
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

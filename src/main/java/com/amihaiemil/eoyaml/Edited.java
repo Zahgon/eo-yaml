@@ -34,6 +34,7 @@ package com.amihaiemil.eoyaml;
  * @since 7.0.0
  */
 final class Edited implements YamlLine {
+
     /**
      * New content of the YamlLine.
      */
@@ -57,16 +58,16 @@ final class Edited implements YamlLine {
 
     @Override
     public String value() {
-        return this.newContent;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int number() {
-        return this.original.number();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int indentation() {
-        return this.original.indentation();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

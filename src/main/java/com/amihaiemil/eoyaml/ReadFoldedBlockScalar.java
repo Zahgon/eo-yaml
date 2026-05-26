@@ -86,29 +86,17 @@ final class ReadFoldedBlockScalar extends BaseFoldedScalar {
     ReadFoldedBlockScalar(final YamlLine previous, final AllYamlLines lines) {
         this.previous = previous;
         this.all = lines;
-        this.significant = new GreaterIndentation(
-            previous,
-            new Skip(
-                lines,
-                line -> line.number() <= previous.number(),
-                line -> {
-                    final YamlLine key = previous;
-                    final Skip.Line skipLine = (Skip.Line) line;
-                    if(skipLine.indentation() == key.indentation()) {
-                        // mark that we finished the block by storing the
-                        // block's key line
-                        skipLine.store(key);
-                    }
-                    // if the key is set then we can safely skip remaining lines
-                    return skipLine.getStored().equals(key);
-                },
-                line -> line.trimmed().endsWith(">"),
-                line -> line.trimmed().startsWith("---"),
-                line -> line.trimmed().startsWith("..."),
-                line -> line.trimmed().startsWith("%"),
-                line -> line.trimmed().startsWith("!!")
-            )
-        );
+        this.significant = new GreaterIndentation(previous, new Skip(lines, line -> line.number() <= previous.number(), line -> {
+            final YamlLine key = previous;
+            final Skip.Line skipLine = (Skip.Line) line;
+            if (skipLine.indentation() == key.indentation()) {
+                // mark that we finished the block by storing the
+                // block's key line
+                skipLine.store(key);
+            }
+            // if the key is set then we can safely skip remaining lines
+            return skipLine.getStored().equals(key);
+        }, line -> line.trimmed().endsWith(">"), line -> line.trimmed().startsWith("---"), line -> line.trimmed().startsWith("..."), line -> line.trimmed().startsWith("%"), line -> line.trimmed().startsWith("!!")));
     }
 
     /**
@@ -117,79 +105,24 @@ final class ReadFoldedBlockScalar extends BaseFoldedScalar {
      * @return Boolean Whether builder do not end with newline char or not
      */
     private boolean doNotEndWithNewLine(final StringBuilder builder) {
-        return builder.length() > 0
-                && !builder.toString().endsWith(System.lineSeparator());
+        return builder.length() > 0 && !builder.toString().endsWith(System.lineSeparator());
     }
+
     /**
      * Value of this scalar.
      * @return String
      */
     public String value() {
-        StringBuilder builder = new StringBuilder();
-        final String newLine = System.lineSeparator();
-        for(final YamlLine line: this.significant) {
-            if(line.trimmed().length() == 0 || line.indentation() > 0) {
-                if(this.doNotEndWithNewLine(builder)) {
-                    builder.append(newLine);
-                }
-                int indentation = line.indentation();
-                for(int i = 0; i < indentation; i++) {
-                    builder.append(' ');
-                }
-                builder.append(line.trimmed());
-                builder.append(newLine);
-            } else {
-                if(this.doNotEndWithNewLine(builder)) {
-                    builder.append(' ');
-                }
-                builder.append(line.trimmed());
-            }
-        }
-        return builder.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        //@checkstyle LineLength (50 lines)
-        return new ReadComment(
-            new Backwards(
-                new FirstCommentFound(
-                    new Backwards(
-                        new Skip(
-                            this.all,
-                            line -> {
-                                final boolean skip;
-                                if(this.previous.number() < 0) {
-                                    if(this.significant.iterator().hasNext()) {
-                                        skip = line.number() >= this.significant
-                                                .iterator().next().number();
-                                    } else {
-                                        skip = false;
-                                    }
-                                } else {
-                                    skip = line.number() >= this.previous.number();
-                                }
-                                return skip;
-                            },
-                            line -> line.trimmed().startsWith("---"),
-                            line -> line.trimmed().startsWith("..."),
-                            line -> line.trimmed().startsWith("%"),
-                            line -> line.trimmed().startsWith("!!")
-                        )
-                    )
-                )
-            ),
-            this
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     List<String> unfolded() {
-        final List<String> unfolded = new ArrayList<>();
-        for(final YamlLine line : this.significant) {
-            unfolded.add(line.toString());
-        }
-        return unfolded;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

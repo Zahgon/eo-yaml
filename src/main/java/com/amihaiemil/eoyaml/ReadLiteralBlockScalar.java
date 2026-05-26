@@ -40,7 +40,6 @@ package com.amihaiemil.eoyaml;
  * @author Sherif Waly (sherifwaly95@gmail.com)
  * @version $Id$
  * @since 1.0.2
- *
  */
 final class ReadLiteralBlockScalar extends BaseScalar {
 
@@ -82,29 +81,17 @@ final class ReadLiteralBlockScalar extends BaseScalar {
     ReadLiteralBlockScalar(final YamlLine previous, final AllYamlLines lines) {
         this.previous = previous;
         this.all = lines;
-        this.significant = new GreaterIndentation(
-            previous,
-            new Skip(
-                lines,
-                line -> line.number() <= previous.number(),
-                line -> {
-                    final YamlLine key = previous;
-                    final Skip.Line skipLine = (Skip.Line) line;
-                    if(skipLine.indentation() == key.indentation()) {
-                        // mark that we finished the block by storing the
-                        // block's key line
-                        skipLine.store(key);
-                    }
-                    // if the key is set then we can safely skip remaining lines
-                    return skipLine.getStored().equals(key);
-                },
-                line -> line.trimmed().endsWith("|"),
-                line -> line.trimmed().startsWith("---"),
-                line -> line.trimmed().startsWith("..."),
-                line -> line.trimmed().startsWith("%"),
-                line -> line.trimmed().startsWith("!!")
-            )
-        );
+        this.significant = new GreaterIndentation(previous, new Skip(lines, line -> line.number() <= previous.number(), line -> {
+            final YamlLine key = previous;
+            final Skip.Line skipLine = (Skip.Line) line;
+            if (skipLine.indentation() == key.indentation()) {
+                // mark that we finished the block by storing the
+                // block's key line
+                skipLine.store(key);
+            }
+            // if the key is set then we can safely skip remaining lines
+            return skipLine.getStored().equals(key);
+        }, line -> line.trimmed().endsWith("|"), line -> line.trimmed().startsWith("---"), line -> line.trimmed().startsWith("..."), line -> line.trimmed().startsWith("%"), line -> line.trimmed().startsWith("!!")));
     }
 
     /**
@@ -112,48 +99,11 @@ final class ReadLiteralBlockScalar extends BaseScalar {
      * @return String
      */
     public String value() {
-        StringBuilder builder = new StringBuilder();
-        for (final YamlLine yamlLine: this.significant) {
-            int previousIndent = previous.indentation();
-            builder.append(yamlLine.contents(Math.max(previousIndent, 0)));
-            builder.append(System.lineSeparator());
-        }
-        return builder.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        return new ReadComment(
-            //@checkstyle LineLength (50 lines)
-            new Backwards(
-                new FirstCommentFound(
-                    new Backwards(
-                        new Skip(
-                            this.all,
-                            line -> {
-                                final boolean skip;
-                                if(this.previous.number() < 0) {
-                                    if(this.significant.iterator().hasNext()) {
-                                        skip = line.number() >= this.significant
-                                                .iterator().next().number();
-                                    } else {
-                                        skip = false;
-                                    }
-                                } else {
-                                    skip = line.number() >= this.previous.number();
-                                }
-                                return skip;
-                            },
-                            line -> line.trimmed().startsWith("---"),
-                            line -> line.trimmed().startsWith("..."),
-                            line -> line.trimmed().startsWith("%"),
-                            line -> line.trimmed().startsWith("!!")
-                        )
-                    )
-                )
-            ),
-            this
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

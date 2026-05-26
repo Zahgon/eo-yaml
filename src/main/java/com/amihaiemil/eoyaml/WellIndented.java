@@ -87,66 +87,11 @@ final class WellIndented implements YamlLines {
      */
     @Override
     public Iterator<YamlLine> iterator() {
-        final Iterator<YamlLine> iterator = this.yamlLines.iterator();
-        final List<YamlLine> wellIndented = new ArrayList<>();
-        YamlLine previous;
-        boolean withinBlockScalar = false;
-        if(iterator.hasNext()) {
-            previous = iterator.next();
-            wellIndented.add(previous);
-            while(iterator.hasNext()) {
-                YamlLine line = iterator.next();
-                if(!(previous instanceof YamlLine.NullYamlLine)) {
-                    final CharSequence prevLineLastChar =
-                        previous.trimmed().substring(previous.trimmed().length() - 1);
-                    if(">|".contains(prevLineLastChar)) {
-                        withinBlockScalar = true;
-                    }
-                    int prevIndent = previous.indentation();
-                    if(previous.trimmed().matches("^\\s*-.*:(|\\s.*)$")
-                        || previous.trimmed().matches("^\\s*-.*-(|\\s.*)$")) {
-                        withinBlockScalar = false;
-                        prevIndent += 2;
-                    }
-                    if(!withinBlockScalar) {
-                        int lineIndent = line.indentation();
-                        if (previous.requireNestedIndentation()) {
-                            if (lineIndent < prevIndent + 2) {
-                                throw new YamlIndentationException(
-                                    "Indentation of line " + (line.number() + 1)
-                                    + " [" + line.trimmed() + "]"
-                                    + " is not ok. It should be greater than the one"
-                                    + " of line " + (previous.number() + 1)
-                                    + " [" + previous.trimmed() + "]"
-                                    + " by at least 2 spaces."
-                                );
-                            }
-                        } else {
-                            if (!"---".equals(previous.trimmed()) && lineIndent > prevIndent) {
-                                if (!":".contains(prevLineLastChar)) {
-                                    throw new YamlIndentationException(
-                                        "Indentation of line " + (line.number() + 1)
-                                        + " [" + line.trimmed() + "]"
-                                        + " is greater than the one of line "
-                                        + (previous.number() + 1)
-                                        + " [" + previous.trimmed() + "]. "
-                                        + "It should be less or equal."
-                                    );
-                                }
-                            }
-                        }
-                    }
-                }
-                previous = line;
-                wellIndented.add(line);
-            }
-        }
-        return wellIndented.iterator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlNode nextYamlNode(final YamlLine prev) {
-        return this.yamlLines.nextYamlNode(prev);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

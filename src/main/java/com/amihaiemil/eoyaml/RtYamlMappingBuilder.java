@@ -36,7 +36,6 @@ import java.util.Map;
  * @author Mihai Andronache (amihaiemil@gmail.com)
  * @version $Id$
  * @since 1.0.0
- *
  */
 final class RtYamlMappingBuilder implements YamlMappingBuilder {
 
@@ -62,20 +61,11 @@ final class RtYamlMappingBuilder implements YamlMappingBuilder {
 
     @Override
     public YamlMappingBuilder add(final YamlNode key, final YamlNode value) {
-        if(key == null || key.isEmpty()) {
-            throw new IllegalArgumentException(
-                "The key in YamlMapping cannot be null or empty!"
-            );
-        }
-        final Map<YamlNode, YamlNode> withAdded = new LinkedHashMap<>();
-        withAdded.putAll(this.pairs);
-        withAdded.put(key, value);
-        return new RtYamlMappingBuilder(withAdded);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlMapping build(final String comment) {
-        return new RtYamlMapping(this.pairs, comment);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

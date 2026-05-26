@@ -58,21 +58,6 @@ interface YamlLines extends Iterable<YamlLine> {
      * @return YamlLine or throws {@link IndexOutOfBoundsException}.
      */
     default YamlLine line(final int number) {
-        int linesNr = 0;
-        final Iterator<YamlLine> iterator = this.iterator();
-        if(number < 0 && iterator.hasNext()) {
-            return iterator.next();
-        }
-        for(final YamlLine line : this){
-            if(line.number() == number) {
-                return line;
-            }
-            linesNr++;
-        }
-        throw new IllegalArgumentException(
-            "Couldn't find line " + number
-          + ". Pay attention, there are "
-          + linesNr + " lines!");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

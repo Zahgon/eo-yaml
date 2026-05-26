@@ -44,19 +44,7 @@ public interface YamlVisitor<T> {
      * @return T returned type.
      */
     default T visitYamlNode(final YamlNode node) {
-        T result;
-        if (node instanceof Scalar) {
-            result = this.visitScalar((Scalar) node);
-        } else if (node instanceof YamlSequence) {
-            result = this.visitYamlSequence((YamlSequence) node);
-        } else if (node instanceof YamlMapping) {
-            result = this.visitYamlMapping((YamlMapping) node);
-        } else if (node instanceof YamlStream) {
-            result = this.visitYamlStream((YamlStream) node);
-        } else {
-            result = this.visitChildren(node);
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -65,7 +53,7 @@ public interface YamlVisitor<T> {
      * @return T returned type.
      */
     default T visitScalar(final Scalar node) {
-        return this.visitChildren(node);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -74,7 +62,7 @@ public interface YamlVisitor<T> {
      * @return T returned type.
      */
     default T visitYamlMapping(final YamlMapping node) {
-        return this.visitChildren(node);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -83,7 +71,7 @@ public interface YamlVisitor<T> {
      * @return T returned type.
      */
     default T visitYamlSequence(final YamlSequence node) {
-        return this.visitChildren(node);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -92,7 +80,7 @@ public interface YamlVisitor<T> {
      * @return T returned type.
      */
     default T visitYamlStream(final YamlStream node) {
-        return this.visitChildren(node);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -101,16 +89,7 @@ public interface YamlVisitor<T> {
      * @return T returned type.
      */
     default T visitChildren(final YamlNode node) {
-        T result = defaultResult();
-        if(node != null) {
-            for (final YamlNode child : node.children()) {
-                if(child != null) {
-                    T childResult = child.accept(this);
-                    result = aggregateResult(result, childResult);
-                }
-            }
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**

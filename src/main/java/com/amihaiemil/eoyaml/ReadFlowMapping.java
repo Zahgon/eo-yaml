@@ -79,23 +79,7 @@ final class ReadFlowMapping extends BaseYamlMapping {
      * @checkstyle AvoidInlineConditionals (30 lines)
      */
     ReadFlowMapping(final YamlLine previous, final AllYamlLines lines) {
-        this(
-            new CollapsedFlowLines(
-                new Skip(
-                    lines,
-                    line -> line.number() <= previous.number(),
-                    line -> line.trimmed().startsWith("#"),
-                    line -> line.trimmed().startsWith("---"),
-                    line -> line.trimmed().startsWith("..."),
-                    line -> line.trimmed().startsWith("%"),
-                    line -> line.trimmed().startsWith("!!")
-                ),
-                '{',
-                '}'
-            ).line(previous.number() < 0 ? 0 : previous.number() + 1),
-            previous,
-            lines
-        );
+        this(new CollapsedFlowLines(new Skip(lines, line -> line.number() <= previous.number(), line -> line.trimmed().startsWith("#"), line -> line.trimmed().startsWith("---"), line -> line.trimmed().startsWith("..."), line -> line.trimmed().startsWith("%"), line -> line.trimmed().startsWith("!!")), '{', '}').line(previous.number() < 0 ? 0 : previous.number() + 1), previous, lines);
     }
 
     /**
@@ -105,9 +89,7 @@ final class ReadFlowMapping extends BaseYamlMapping {
      * @param previous Line previous to where this flow mapping starts.
      * @param all All the lines of the YAML document.
      */
-    ReadFlowMapping(
-        final YamlLine folded, final YamlLine previous, final AllYamlLines all
-    ) {
+    ReadFlowMapping(final YamlLine folded, final YamlLine previous, final AllYamlLines all) {
         this.previous = previous;
         this.all = all;
         this.entries = new StringEntries(folded);
@@ -116,56 +98,18 @@ final class ReadFlowMapping extends BaseYamlMapping {
 
     @Override
     public Set<YamlNode> keys() {
-        final Set<YamlNode> keys = new LinkedHashSet<>();
-        for(final Map.Entry<String, String> entry : this.entries) {
-            keys.add(this.stringToYamlNodeNode(entry.getKey()));
-        }
-        return keys;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     //@checkstyle ReturnCount (50 lines)
     @Override
     public YamlNode value(final YamlNode key) {
-        for(final Map.Entry<String, String> entry : this.entries) {
-            final YamlNode entryKey = this.stringToYamlNodeNode(
-                entry.getKey()
-            );
-            if(entryKey.equals(key)) {
-                return this.stringToYamlNodeNode(entry.getValue());
-            }
-        }
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        boolean documentComment = this.previous.number() < 0;
-        //@checkstyle LineLength (50 lines)
-        return new ReadComment(
-            new Backwards(
-                new FirstCommentFound(
-                    new Backwards(
-                        new Skip(
-                            this.all,
-                            line -> {
-                                final boolean skip;
-                                if(documentComment) {
-                                    skip = line.number() >= this.folded.number();
-                                } else {
-                                    skip = line.number() >= this.previous.number();
-                                }
-                                return skip;
-                            },
-                            line -> line.trimmed().startsWith("..."),
-                            line -> line.trimmed().startsWith("%"),
-                            line -> line.trimmed().startsWith("!!")
-                        )
-                    ),
-                    documentComment
-                )
-            ),
-            this
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -176,17 +120,9 @@ final class ReadFlowMapping extends BaseYamlMapping {
     private YamlNode stringToYamlNodeNode(final String node) {
         final YamlNode yaml;
         if (node.startsWith("[")) {
-            yaml = new ReadFlowSequence(
-                new RtYamlLine(node, this.folded.number()),
-                this.previous,
-                this.all
-            );
+            yaml = new ReadFlowSequence(new RtYamlLine(node, this.folded.number()), this.previous, this.all);
         } else if (node.startsWith("{")) {
-            yaml = new ReadFlowMapping(
-                new RtYamlLine(node, this.folded.number()),
-                this.previous,
-                this.all
-            );
+            yaml = new ReadFlowMapping(new RtYamlLine(node, this.folded.number()), this.previous, this.all);
         } else {
             yaml = new PlainStringScalar(node.trim());
         }
@@ -221,53 +157,7 @@ final class ReadFlowMapping extends BaseYamlMapping {
 
         @Override
         public Iterator<Map.Entry<String, String>> iterator() {
-            final List<String> keys = new ArrayList<>();
-            final List<String> values = new ArrayList<>();
-            final String trimmed = line.trimmed();
-            final String nodes = trimmed.substring(
-                trimmed.indexOf('{') + 1,
-                trimmed.lastIndexOf('}')
-            );
-            StringBuilder nodeBuilder = new StringBuilder();
-            boolean startedQuoteEscape = false;
-            boolean startedApEscape = false;
-            for (int i = 0; i < nodes.length(); i++) {
-                final char currentChar = nodes.charAt(i);
-                if(currentChar == ':' && !startedApEscape && !startedQuoteEscape) {
-                    keys.add(nodeBuilder.toString().trim());
-                    nodeBuilder.setLength(0);
-                    continue;
-                }
-                if (currentChar == ',' && !startedApEscape && !startedQuoteEscape) {
-                    values.add(nodeBuilder.toString().trim());
-                    nodeBuilder.setLength(0);
-                    continue;
-                }
-                if (isEscapeChar(i, '\"', nodes) && !startedApEscape) {
-                    startedQuoteEscape = !startedQuoteEscape;
-                    nodeBuilder.append(currentChar);
-                } else if (isEscapeChar(i, '\'', nodes) && !startedQuoteEscape) {
-                    startedApEscape = !startedApEscape;
-                    nodeBuilder.append(currentChar);
-                } else if ((currentChar == '[' || currentChar == '{') && !(startedApEscape || startedQuoteEscape)) {
-                    String nestedNode = this.readNode(i, nodes, currentChar);
-                    nodeBuilder.append(nestedNode);
-                    i += nestedNode.length() - 1;
-                } else {
-                    nodeBuilder.append(currentChar);
-                }
-            }
-            if (!nodeBuilder.toString().trim().isEmpty()) {
-                values.add(nodeBuilder.toString().trim());
-            }
-            if(keys.size() != values.size()) {
-                throw new IllegalStateException("Invalid flow YamlMapping!");
-            }
-            final Map<String, String> mapping = new LinkedHashMap<>();
-            for(int i=0; i< keys.size(); i++) {
-                mapping.put(keys.get(i), values.get(i));
-            }
-            return mapping.entrySet().iterator();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -277,13 +167,9 @@ final class ReadFlowMapping extends BaseYamlMapping {
          * @param opening Opening bracket ([ or {).
          * @return Integer index where the read node ends.
          */
-        private String readNode(
-            final int start,
-            final String nodes,
-            final char opening
-        ) {
+        private String readNode(final int start, final String nodes, final char opening) {
             char closing;
-            if(opening == '{') {
+            if (opening == '{') {
                 closing = '}';
             } else {
                 closing = ']';
@@ -292,21 +178,17 @@ final class ReadFlowMapping extends BaseYamlMapping {
             node.append(nodes.charAt(start));
             int nested = 1;
             int i = start;
-            while(nested != 0) {
+            while (nested != 0) {
                 i++;
-                if(i == nodes.length()) {
-                    throw new IllegalStateException(
-                        "Could not find closing bracket " + closing
-                        + " for node starting at " + start
-                        + " on line " + (this.line.number() + 1)
-                    );
+                if (i == nodes.length()) {
+                    throw new IllegalStateException("Could not find closing bracket " + closing + " for node starting at " + start + " on line " + (this.line.number() + 1));
                 }
                 i = goOverEscapedValue(node, i, nodes, '\"');
                 i = goOverEscapedValue(node, i, nodes, '\'');
                 node.append(nodes.charAt(i));
-                if(nodes.charAt(i) == opening){
+                if (nodes.charAt(i) == opening) {
                     nested++;
-                } else if(nodes.charAt(i) == closing) {
+                } else if (nodes.charAt(i) == closing) {
                     nested--;
                 }
             }
@@ -323,25 +205,16 @@ final class ReadFlowMapping extends BaseYamlMapping {
          * @param escapeChar Escape char.
          * @return Integer index where the escaped value stops.
          */
-        private int goOverEscapedValue(
-            final StringBuilder node,
-            final int start,
-            final String nodes,
-            final char escapeChar
-        ) {
+        private int goOverEscapedValue(final StringBuilder node, final int start, final String nodes, final char escapeChar) {
             int i = start;
-            if(isEscapeChar(i, escapeChar, nodes)) {
+            if (isEscapeChar(i, escapeChar, nodes)) {
                 node.append(nodes.charAt(i));
                 i++;
-                while(!isEscapeChar(i, escapeChar, nodes)) {
+                while (!isEscapeChar(i, escapeChar, nodes)) {
                     node.append(nodes.charAt(i));
                     i++;
-                    if(i == nodes.length()) {
-                        throw new IllegalStateException(
-                            "Could not find closing pair (" + escapeChar
-                                + ") for escaped value starting at " + start
-                                + " on line " + (this.line.number() + 1)
-                        );
+                    if (i == nodes.length()) {
+                        throw new IllegalStateException("Could not find closing pair (" + escapeChar + ") for escaped value starting at " + start + " on line " + (this.line.number() + 1));
                     }
                 }
             }
@@ -356,9 +229,7 @@ final class ReadFlowMapping extends BaseYamlMapping {
          * @return True if the escape character is found and it is
          *  not preceded by a backslash.
          */
-        private boolean isEscapeChar(
-            final int start, final char escapeChar, final String nodes
-        ) {
+        private boolean isEscapeChar(final int start, final char escapeChar, final String nodes) {
             final boolean result;
             if (nodes.charAt(start) == escapeChar) {
                 result = start == 0 || nodes.charAt(start - 1) != '\\';

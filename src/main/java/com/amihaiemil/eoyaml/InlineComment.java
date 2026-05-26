@@ -54,13 +54,11 @@ final class InlineComment implements Comment {
 
     @Override
     public YamlNode yamlNode() {
-        return this.original.yamlNode();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String value() {
-        return Arrays.stream(
-            this.original.value().split("\\r?\\n")
-        ).collect(Collectors.joining(" "));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

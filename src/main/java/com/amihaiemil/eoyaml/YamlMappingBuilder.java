@@ -57,10 +57,7 @@ public interface YamlMappingBuilder {
      * @return Builder
      */
     default YamlMappingBuilder add(final String key, final String value) {
-        return this.add(
-            new PlainStringScalar(key),
-            new PlainStringScalar(value)
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -70,10 +67,7 @@ public interface YamlMappingBuilder {
      * @return Builder
      */
     default YamlMappingBuilder add(final String key, final char[] value) {
-        return this.add(
-            new PlainStringScalar(key),
-            new PlainStringScalar(String.valueOf(value))
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -83,10 +77,7 @@ public interface YamlMappingBuilder {
      * @return Builder
      */
     default YamlMappingBuilder add(final String key, final char value) {
-        return this.add(
-            new PlainStringScalar(key),
-            new PlainStringScalar(String.valueOf(value))
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -96,10 +87,7 @@ public interface YamlMappingBuilder {
      * @return Builder
      */
     default YamlMappingBuilder add(final String key, final int value) {
-        return this.add(
-            new PlainStringScalar(key),
-            new PlainStringScalar(String.valueOf(value))
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -109,10 +97,7 @@ public interface YamlMappingBuilder {
      * @return Builder
      */
     default YamlMappingBuilder add(final String key, final double value) {
-        return this.add(
-            new PlainStringScalar(key),
-            new PlainStringScalar(String.valueOf(value))
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -122,10 +107,7 @@ public interface YamlMappingBuilder {
      * @return Builder
      */
     default YamlMappingBuilder add(final String key, final float value) {
-        return this.add(
-            new PlainStringScalar(key),
-            new PlainStringScalar(String.valueOf(value))
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -135,10 +117,7 @@ public interface YamlMappingBuilder {
      * @return Builder
      */
     default YamlMappingBuilder add(final String key, final long value) {
-        return this.add(
-            new PlainStringScalar(key),
-            new PlainStringScalar(String.valueOf(value))
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -148,10 +127,7 @@ public interface YamlMappingBuilder {
      * @return Builder
      */
     default YamlMappingBuilder add(final String key, final LocalDate value) {
-        return this.add(
-            new PlainStringScalar(key),
-            new PlainStringScalar(String.valueOf(value))
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -160,13 +136,8 @@ public interface YamlMappingBuilder {
      * @param value LocalDateTime
      * @return Builder
      */
-    default YamlMappingBuilder add(
-        final String key, final LocalDateTime value
-    ) {
-        return this.add(
-            new PlainStringScalar(key),
-            new PlainStringScalar(String.valueOf(value))
-        );
+    default YamlMappingBuilder add(final String key, final LocalDateTime value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -176,10 +147,7 @@ public interface YamlMappingBuilder {
      * @return Builder
      */
     default YamlMappingBuilder add(final String key, final boolean value) {
-        return this.add(
-            new PlainStringScalar(key),
-            new PlainStringScalar(String.valueOf(value))
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -189,7 +157,7 @@ public interface YamlMappingBuilder {
      * @return Builder
      */
     default YamlMappingBuilder add(final String key, final YamlNode value) {
-        return this.add(new PlainStringScalar(key), value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -199,16 +167,8 @@ public interface YamlMappingBuilder {
      *              or {@link javax.json.JsonArray})
      * @return Builder
      */
-    default YamlMappingBuilder add(
-        final String key, final JsonStructure value
-    ) {
-        final YamlNode node;
-        if(value instanceof JsonObject) {
-            node = new JsonYamlMapping((JsonObject) value);
-        } else {
-            node = new JsonYamlSequence((JsonArray) value);
-        }
-        return this.add(key, node);
+    default YamlMappingBuilder add(final String key, final JsonStructure value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -218,7 +178,7 @@ public interface YamlMappingBuilder {
      * @return Builder
      */
     default YamlMappingBuilder add(final YamlNode key, final String value) {
-        return this.add(key, new PlainStringScalar(value));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -228,16 +188,8 @@ public interface YamlMappingBuilder {
      *              or {@link javax.json.JsonArray})
      * @return Builder
      */
-    default YamlMappingBuilder add(
-        final YamlNode key, final JsonStructure value
-    ) {
-        final YamlNode node;
-        if(value instanceof JsonObject) {
-            node = new JsonYamlMapping((JsonObject) value);
-        } else {
-            node = new JsonYamlSequence((JsonArray) value);
-        }
-        return this.add(key, node);
+    default YamlMappingBuilder add(final YamlNode key, final JsonStructure value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -245,16 +197,16 @@ public interface YamlMappingBuilder {
      * @return Built YamlMapping.
      */
     default YamlMapping build() {
-        return this.build("");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    
+
     /**
      * Build the YamlMapping.
      * @param comment The multiple line comment on top of the YamlMapping.
      * @return Built YamlMapping.
      */
     default YamlMapping build(final Collection<String> comment) {
-        return this.build(String.join(System.lineSeparator(), comment));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**

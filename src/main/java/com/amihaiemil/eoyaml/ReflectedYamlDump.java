@@ -43,10 +43,7 @@ final class ReflectedYamlDump implements YamlDump {
     /**
      * If the value is any of these types, it is a Scalar.
      */
-    private static final List<Class> SCALAR_TYPES = Arrays.asList(
-        Integer.class, Long.class, Float.class, Double.class, Short.class,
-        String.class, Boolean.class, Character.class, Byte.class
-    );
+    private static final List<Class> SCALAR_TYPES = Arrays.asList(Integer.class, Long.class, Float.class, Double.class, Short.class, String.class, Boolean.class, Character.class, Byte.class);
 
     /**
      * Object to dump.
@@ -57,20 +54,12 @@ final class ReflectedYamlDump implements YamlDump {
      * Constructor.
      * @param object Object to dump.
      */
-    ReflectedYamlDump(final Object object){
+    ReflectedYamlDump(final Object object) {
         this.object = object;
     }
 
     @Override
     public YamlNode dump(final String comment) {
-        final YamlNode node;
-        if(this.object == null || SCALAR_TYPES.contains(this.object.getClass())) {
-            node = new ReflectedYamlScalar(this.object, comment);
-        } else if(this.object instanceof Collection || this.object.getClass().isArray()){
-            node = new ReflectedYamlSequence(this.object, comment);
-        } else {
-            node = new ReflectedYamlMapping(this.object, comment);
-        }
-        return node;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

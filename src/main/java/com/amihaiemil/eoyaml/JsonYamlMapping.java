@@ -55,36 +55,16 @@ final class JsonYamlMapping extends BaseYamlMapping {
 
     @Override
     public Set<YamlNode> keys() {
-        final Set<YamlNode> keys = new LinkedHashSet<>();
-        this.object.keySet().forEach(key -> keys
-            .add(new PlainStringScalar(key)));
-        return keys;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlNode value(final YamlNode key) {
-        final String scalar = key.asScalar().value();
-        final YamlNode value;
-        if(scalar == null) {
-            value = null;
-        } else {
-            value = new JsonYamlDump(this.object.get(scalar)).dump();
-        }
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        return new Comment() {
-            @Override
-            public YamlNode yamlNode() {
-                return JsonYamlMapping.this;
-            }
-
-            @Override
-            public String value() {
-                return "";
-            }
-        };
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

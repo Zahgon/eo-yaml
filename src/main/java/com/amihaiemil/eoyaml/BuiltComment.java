@@ -57,11 +57,11 @@ class BuiltComment implements Comment {
 
     @Override
     public YamlNode yamlNode() {
-        return this.node;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String value() {
-        return this.value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

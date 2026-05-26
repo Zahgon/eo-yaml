@@ -29,7 +29,6 @@ package com.amihaiemil.eoyaml;
 
 import java.util.*;
 
-
 /**
  * Base YamlMapping which all implementations of YamlMapping should extend.
  * It implementing toString(), equals, hashcode and compareTo methods.
@@ -41,8 +40,7 @@ import java.util.*;
  * @version $Id$
  * @since 4.0.0
  */
-public abstract class BaseYamlMapping
-    extends BaseYamlNode implements YamlMapping {
+public abstract class BaseYamlMapping extends BaseYamlNode implements YamlMapping {
 
     /**
      * Ctor.
@@ -62,19 +60,12 @@ public abstract class BaseYamlMapping
 
     @Override
     public final Node type() {
-        return Node.MAPPING;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public final int hashCode() {
-        int hash = 0;
-        for(final YamlNode key : this.keys()) {
-            hash += key.hashCode();
-        }
-        for(final YamlNode value : this.values()) {
-            hash += value.hashCode();
-        }
-        return hash;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -85,15 +76,7 @@ public abstract class BaseYamlMapping
      */
     @Override
     public final boolean equals(final Object other) {
-        final boolean result;
-        if (other == null || !(other instanceof YamlMapping)) {
-            result = false;
-        } else if (this == other) {
-            result = true;
-        } else {
-            result = this.compareTo((YamlMapping) other) == 0;
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -117,45 +100,11 @@ public abstract class BaseYamlMapping
      */
     @Override
     public final int compareTo(final YamlNode other) {
-        int result = 0;
-        if (other == null || !(other instanceof YamlMapping)) {
-            result = 1;
-        } else if (this != other) {
-            final BaseYamlMapping map = (BaseYamlMapping) other;
-            final Set<YamlNode> keys = this.keys();
-            final Set<YamlNode> otherKeys = map.keys();
-            if(keys.size() > otherKeys.size()) {
-                result = 1;
-            } else if (keys.size() < otherKeys.size()) {
-                result = -1;
-            } else {
-                final Iterator<YamlNode> keysIt = keys.iterator();
-                final Iterator<YamlNode> otherKeysIt = otherKeys.iterator();
-                final Iterator<YamlNode> values = this.values().iterator();
-                final Iterator<YamlNode> otherVals = map.values().iterator();
-                int keysComparison;
-                int valuesComparison;
-                while(values.hasNext()) {
-                    keysComparison = keysIt.next()
-                        .compareTo(otherKeysIt.next());
-                    valuesComparison = values.next()
-                        .compareTo(otherVals.next());
-                    if(keysComparison != 0) {
-                        result = keysComparison;
-                        break;
-                    }
-                    if(valuesComparison != 0) {
-                        result = valuesComparison;
-                        break;
-                    }
-                }
-            }
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public final boolean isEmpty() {
-        return this.keys().isEmpty();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

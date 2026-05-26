@@ -38,6 +38,7 @@ import java.util.Map;
  * @since 6.1.0
  */
 final class MutableYamlMappingBuilder implements YamlMappingBuilder {
+
     /**
      * Added pairs.
      */
@@ -60,17 +61,11 @@ final class MutableYamlMappingBuilder implements YamlMappingBuilder {
 
     @Override
     public YamlMappingBuilder add(final YamlNode key, final YamlNode value) {
-        if(key == null || key.isEmpty()) {
-            throw new IllegalArgumentException(
-                "The key in YamlMapping cannot be null or empty!"
-            );
-        }
-        this.pairs.put(key, value);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlMapping build(final String comment) {
-        return new RtYamlMapping(this.pairs, comment);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

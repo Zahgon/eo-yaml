@@ -54,33 +54,13 @@ final class ReadYamlStream extends BaseYamlStream {
      * @param lines All YAML lines as they are read from the input.
      */
     ReadYamlStream(final AllYamlLines lines) {
-        this.startMarkers = new WellIndented(
-            new StartMarkers(
-                new Skip(
-                    lines,
-                    line -> line.trimmed().startsWith("#"),
-                    line -> line.trimmed().startsWith("%")
-                )
-            )
-        );
-        this.all = new Skip(
-            lines,
-            line -> line.trimmed().startsWith("%")
-        );
+        this.startMarkers = new WellIndented(new StartMarkers(new Skip(lines, line -> line.trimmed().startsWith("#"), line -> line.trimmed().startsWith("%"))));
+        this.all = new Skip(lines, line -> line.trimmed().startsWith("%"));
     }
 
     @Override
     public Collection<YamlNode> values() {
-        final List<YamlNode> values = new ArrayList<>();
-        for(final YamlLine startDoc : this.startMarkers) {
-            final YamlLines document = this.readDocument(startDoc);
-            if(document.iterator().hasNext()) {
-                values.add(
-                    document.nextYamlNode(startDoc)
-                );
-            }
-        }
-        return values;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -90,20 +70,14 @@ final class ReadYamlStream extends BaseYamlStream {
      */
     private YamlLines readDocument(final YamlLine start) {
         final List<YamlLine> yamlDocLines = new ArrayList<>();
-        final YamlLines docComment = new Backwards(
-            new FirstCommentFound(
-                new Backwards(
-                    new Skip(this.all, (line) -> line.number() > start.number())
-                ), true
-            )
-        );
-        for (final YamlLine line: docComment){
+        final YamlLines docComment = new Backwards(new FirstCommentFound(new Backwards(new Skip(this.all, (line) -> line.number() > start.number())), true));
+        for (final YamlLine line : docComment) {
             yamlDocLines.add(line);
         }
-        for(final YamlLine line : this.all) {
-            if(line.number() > start.number()) {
+        for (final YamlLine line : this.all) {
+            if (line.number() > start.number()) {
                 final String current = line.trimmed();
-                if("---".equals(current) || "...".equals(current)) {
+                if ("---".equals(current) || "...".equals(current)) {
                     break;
                 } else {
                     yamlDocLines.add(line);
@@ -112,5 +86,4 @@ final class ReadYamlStream extends BaseYamlStream {
         }
         return new AllYamlLines(yamlDocLines);
     }
-
 }

@@ -64,13 +64,7 @@ public interface YamlSequenceBuilder {
      * @return Builder
      */
     default YamlSequenceBuilder add(final JsonStructure value) {
-        final YamlNode node;
-        if(value instanceof JsonObject) {
-            node = new JsonYamlMapping((JsonObject) value);
-        } else {
-            node = new JsonYamlSequence((JsonArray) value);
-        }
-        return this.add(node);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -79,7 +73,7 @@ public interface YamlSequenceBuilder {
      * @return Builder
      */
     default YamlSequenceBuilder add(final char value) {
-        return this.add(String.valueOf(value));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -88,7 +82,7 @@ public interface YamlSequenceBuilder {
      * @return Builder
      */
     default YamlSequenceBuilder add(final char[] value) {
-        return this.add(String.valueOf(value));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -97,7 +91,7 @@ public interface YamlSequenceBuilder {
      * @return Builder
      */
     default YamlSequenceBuilder add(final int value) {
-        return this.add(String.valueOf(value));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -106,7 +100,7 @@ public interface YamlSequenceBuilder {
      * @return Builder
      */
     default YamlSequenceBuilder add(final double value) {
-        return this.add(String.valueOf(value));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -115,7 +109,7 @@ public interface YamlSequenceBuilder {
      * @return Builder
      */
     default YamlSequenceBuilder add(final float value) {
-        return this.add(String.valueOf(value));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -124,7 +118,7 @@ public interface YamlSequenceBuilder {
      * @return Builder
      */
     default YamlSequenceBuilder add(final long value) {
-        return this.add(String.valueOf(value));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -133,7 +127,7 @@ public interface YamlSequenceBuilder {
      * @return Builder
      */
     default YamlSequenceBuilder add(final boolean value) {
-        return this.add(String.valueOf(value));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -142,7 +136,7 @@ public interface YamlSequenceBuilder {
      * @return Builder
      */
     default YamlSequenceBuilder add(final LocalDate value) {
-        return this.add(String.valueOf(value));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -151,7 +145,7 @@ public interface YamlSequenceBuilder {
      * @return Builder
      */
     default YamlSequenceBuilder add(final LocalDateTime value) {
-        return this.add(String.valueOf(value));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -159,7 +153,7 @@ public interface YamlSequenceBuilder {
      * @return Built YamlSequence
      */
     default YamlSequence build() {
-        return this.build("");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -168,7 +162,7 @@ public interface YamlSequenceBuilder {
      * @return Built YamlSequence
      */
     default YamlSequence build(final Collection<String> comment) {
-        return this.build(String.join(System.lineSeparator(), comment));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**

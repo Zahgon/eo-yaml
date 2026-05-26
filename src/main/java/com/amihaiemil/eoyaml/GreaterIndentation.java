@@ -71,26 +71,11 @@ final class GreaterIndentation implements YamlLines {
      */
     @Override
     public Iterator<YamlLine> iterator() {
-        Iterator<YamlLine> iterator = this.yamlLines.iterator();
-        if (iterator.hasNext()) {
-            final List<YamlLine> greater = new ArrayList<>();
-            while (iterator.hasNext()) {
-                YamlLine current = iterator.next();
-                if(current.indentation() > this.reference.indentation()) {
-                    greater.add(current);
-                } else if (
-                    current.indentation() <= this.reference.indentation()
-                ) {
-                    break;
-                }
-            }
-            iterator = greater.iterator();
-        }
-        return iterator;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlNode nextYamlNode(final YamlLine prev) {
-        return this.yamlLines.nextYamlNode(prev);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

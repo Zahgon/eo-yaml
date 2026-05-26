@@ -55,23 +55,11 @@ final class JsonYamlSequence extends BaseYamlSequence {
 
     @Override
     public Collection<YamlNode> values() {
-        return this.array.stream()
-            .map(value -> new JsonYamlDump(value).dump())
-            .collect(Collectors.toList());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        return new Comment() {
-            @Override
-            public YamlNode yamlNode() {
-                return JsonYamlSequence.this;
-            }
-
-            @Override
-            public String value() {
-                return "";
-            }
-        };
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -78,18 +78,12 @@ final class FirstCommentFound implements YamlLines {
      */
     @Override
     public Iterator<YamlLine> iterator() {
-        final Iterator<YamlLine> iterator;
-        if(this.documentComment) {
-            iterator = this.documentComment();
-        } else {
-            iterator = this.nodeComment();
-        }
-        return iterator;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlNode nextYamlNode(final YamlLine prev) {
-        return this.lines.nextYamlNode(prev);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -108,7 +102,7 @@ final class FirstCommentFound implements YamlLines {
             final YamlLine line = iterator.next();
             boolean hasComment = !line.comment().isEmpty();
             boolean notYamlStart = !"---".equals(line.trimmed());
-            if(notYamlStart && hasComment && line.trimmed().startsWith("#")) {
+            if (notYamlStart && hasComment && line.trimmed().startsWith("#")) {
                 comment.add(line);
             } else {
                 break;
@@ -128,14 +122,14 @@ final class FirstCommentFound implements YamlLines {
         Iterator<YamlLine> iterator = this.lines.iterator();
         while (iterator.hasNext()) {
             YamlLine line = iterator.next();
-            if("---".equals(line.trimmed())) {
-                while(iterator.hasNext()) {
+            if ("---".equals(line.trimmed())) {
+                while (iterator.hasNext()) {
                     line = iterator.next();
-                    if(!line.comment().isEmpty()) {
-                        if(line.trimmed().startsWith("#")) {
+                    if (!line.comment().isEmpty()) {
+                        if (line.trimmed().startsWith("#")) {
                             comment.add(line);
                         }
-                    } else if (!line.trimmed().isEmpty()){
+                    } else if (!line.trimmed().isEmpty()) {
                         break;
                     }
                 }

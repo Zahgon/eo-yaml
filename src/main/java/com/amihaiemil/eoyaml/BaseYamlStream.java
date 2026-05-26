@@ -45,16 +45,12 @@ abstract class BaseYamlStream extends BaseYamlNode implements YamlStream {
 
     @Override
     public final Node type() {
-        return Node.STREAM;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        for(final YamlNode node : this.values()) {
-            hash += node.hashCode();
-        }
-        return hash;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -65,15 +61,7 @@ abstract class BaseYamlStream extends BaseYamlNode implements YamlStream {
      */
     @Override
     public boolean equals(final Object other) {
-        final boolean result;
-        if (other == null || !(other instanceof YamlStream)) {
-            result = false;
-        } else if (this == other) {
-            result = true;
-        } else {
-            result = this.compareTo((YamlStream) other) == 0;
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -97,36 +85,11 @@ abstract class BaseYamlStream extends BaseYamlNode implements YamlStream {
      */
     @Override
     public int compareTo(final YamlNode other) {
-        int result = 0;
-        if (other == null || other instanceof Scalar) {
-            result = 1;
-        } else if (other instanceof YamlSequence) {
-            result = 1;
-        } else if (other instanceof YamlMapping) {
-            result = 1;
-        } else if (this != other) {
-            final Collection<YamlNode> nodes = this.values();
-            final Collection<YamlNode> others = ((YamlStream) other).values();
-            if(nodes.size() > others.size()) {
-                result = 1;
-            } else if (nodes.size() < others.size()) {
-                result = -1;
-            } else {
-                final Iterator<YamlNode> iterator = others.iterator();
-                final Iterator<YamlNode> here = nodes.iterator();
-                while(iterator.hasNext()) {
-                    result = here.next().compareTo(iterator.next());
-                    if(result != 0) {
-                        break;
-                    }
-                }
-            }
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public final boolean isEmpty() {
-        return this.values().isEmpty();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

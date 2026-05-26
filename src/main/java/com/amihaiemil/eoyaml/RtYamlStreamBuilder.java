@@ -62,15 +62,12 @@ final class RtYamlStreamBuilder implements YamlStreamBuilder {
 
     @Override
     public YamlStreamBuilder add(final YamlNode document) {
-        final List<YamlNode> list = new LinkedList<>();
-        list.addAll(this.documents);
-        list.add(document);
-        return new RtYamlStreamBuilder(list);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlStream build() {
-        return new BuiltYamlStream(this.documents);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -96,8 +93,7 @@ final class RtYamlStreamBuilder implements YamlStreamBuilder {
 
         @Override
         public Collection<YamlNode> values() {
-            return this.documents;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
-
 }

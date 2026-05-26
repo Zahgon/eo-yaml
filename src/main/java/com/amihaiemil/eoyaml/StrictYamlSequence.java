@@ -59,7 +59,7 @@ public final class StrictYamlSequence extends BaseYamlSequence {
 
     @Override
     public Collection<YamlNode> values() {
-        return this.decorated.values();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -69,13 +69,7 @@ public final class StrictYamlSequence extends BaseYamlSequence {
      */
     @Override
     public YamlMapping yamlMapping(final int index) {
-        YamlMapping found = this.decorated.yamlMapping(index);
-        if (found == null) {
-            throw new YamlNodeNotFoundException(
-                "No YamlMapping found at index " + index
-            );
-        }
-        return found;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -85,13 +79,7 @@ public final class StrictYamlSequence extends BaseYamlSequence {
      */
     @Override
     public YamlSequence yamlSequence(final int index) {
-        YamlSequence found = this.decorated.yamlSequence(index);
-        if (found == null) {
-            throw new YamlNodeNotFoundException(
-                "No YamlSequence found at index " + index
-            );
-        }
-        return found;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -101,13 +89,7 @@ public final class StrictYamlSequence extends BaseYamlSequence {
      */
     @Override
     public String string(final int index) {
-        String found = this.decorated.string(index);
-        if (found == null) {
-            throw new YamlNodeNotFoundException(
-                "No String found at index " + index
-            );
-        }
-        return found;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -117,13 +99,7 @@ public final class StrictYamlSequence extends BaseYamlSequence {
      */
     @Override
     public String foldedBlockScalar(final int index) {
-        String found = this.decorated.foldedBlockScalar(index);
-        if (found == null) {
-            throw new YamlNodeNotFoundException(
-                "No folded block scalar found at index " + index
-            );
-        }
-        return found;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -133,17 +109,11 @@ public final class StrictYamlSequence extends BaseYamlSequence {
      */
     @Override
     public Collection<String> literalBlockScalar(final int index) {
-        Collection<String> found = this.decorated.literalBlockScalar(index);
-        if (found == null) {
-            throw new YamlNodeNotFoundException(
-                "No String found at index " + index
-            );
-        }
-        return found;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        return this.decorated.comment();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

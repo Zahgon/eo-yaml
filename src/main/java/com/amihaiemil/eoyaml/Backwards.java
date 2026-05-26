@@ -52,16 +52,11 @@ final class Backwards implements YamlLines {
 
     @Override
     public YamlNode nextYamlNode(final YamlLine prev) {
-        return this.lines.nextYamlNode(prev);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Iterator<YamlLine> iterator() {
-        final List<YamlLine> original = new ArrayList<>();
-        for(final YamlLine line : this.lines) {
-            original.add(line);
-        }
-        Collections.reverse(original);
-        return original.iterator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

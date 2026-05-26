@@ -57,172 +57,171 @@ public interface YamlStream extends YamlNode, Stream<YamlNode> {
 
     @Override
     default List<YamlNode> children() {
-        return new ArrayList<>(this.values());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Comment comment() {
-        return new BuiltComment(this, "");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Iterator<YamlNode> iterator() {
-        return this.values().stream().iterator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Spliterator<YamlNode> spliterator() {
-        return this.values().stream().spliterator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default boolean isParallel() {
-        return this.values().stream().isParallel();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Stream<YamlNode> sequential() {
-        return this.values().stream().sequential();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Stream<YamlNode> parallel() {
-        return this.values().stream().parallel();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Stream<YamlNode> unordered() {
-        return this.values().stream().unordered();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Stream<YamlNode> onClose(Runnable closeHandler) {
-        return this.values().stream().onClose(closeHandler);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default void close() {
-        this.values().stream().close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Stream<YamlNode> filter(Predicate<? super YamlNode> predicate) {
-        return this.values().stream().filter(predicate);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default <R> Stream<R> map(Function<? super YamlNode, ? extends R> mapper) {
-        return this.values().stream().map(mapper);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default IntStream mapToInt(ToIntFunction<? super YamlNode> mapper) {
-        return this.values().stream().mapToInt(mapper);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default LongStream mapToLong(ToLongFunction<? super YamlNode> mapper) {
-        return this.values().stream().mapToLong(mapper);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default DoubleStream mapToDouble(ToDoubleFunction<? super YamlNode> mapper) {
-        return this.values().stream().mapToDouble(mapper);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default <R> Stream<R> flatMap(Function<? super YamlNode, ? extends Stream<? extends R>> mapper) {
-        return this.values().stream().flatMap(mapper);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default IntStream flatMapToInt(Function<? super YamlNode, ? extends IntStream> mapper) {
-        return this.values().stream().flatMapToInt(mapper);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default LongStream flatMapToLong(Function<? super YamlNode, ? extends LongStream> mapper) {
-        return this.values().stream().flatMapToLong(mapper);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default DoubleStream flatMapToDouble(Function<? super YamlNode, ? extends DoubleStream> mapper) {
-        return this.values().stream().flatMapToDouble(mapper);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Stream<YamlNode> distinct() {
-        return this.values().stream().distinct();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Stream<YamlNode> sorted() {
-        return this.values().stream().sorted();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Stream<YamlNode> sorted(Comparator<? super YamlNode> comparator) {
-        return this.values().stream().sorted(comparator);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Stream<YamlNode> peek(Consumer<? super YamlNode> action) {
-        return this.values().stream().peek(action);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Stream<YamlNode> limit(long maxSize) {
-        return this.values().stream().limit(maxSize);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Stream<YamlNode> skip(long n) {
-        return this.values().stream().skip(n);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default void forEach(Consumer<? super YamlNode> action) {
-        this.values().stream().forEach(action);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default void forEachOrdered(Consumer<? super YamlNode> action) {
-        this.values().stream().forEachOrdered(action);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Object[] toArray() {
-        return this.values().stream().toArray();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default <A> A[] toArray(IntFunction<A[]> generator) {
-        return this.values().stream().toArray(generator);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default YamlNode reduce(YamlNode identity, BinaryOperator<YamlNode> accumulator) {
-        return this.values().stream().reduce(identity, accumulator);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Optional<YamlNode> reduce(BinaryOperator<YamlNode> accumulator) {
-        return this.values().stream().reduce(accumulator);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default <U> U reduce(U identity, BiFunction<U, ? super YamlNode, U> accumulator, BinaryOperator<U> combiner) {
-        return this.values().stream().reduce(identity, accumulator, combiner);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    default <R> R collect(Supplier<R> supplier, BiConsumer<R, ? super YamlNode> accumulator,
-                         BiConsumer<R, R> combiner) {
-        return this.values().stream().collect(supplier, accumulator, combiner);
+    default <R> R collect(Supplier<R> supplier, BiConsumer<R, ? super YamlNode> accumulator, BiConsumer<R, R> combiner) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default <R, A> R collect(Collector<? super YamlNode, A, R> collector) {
-        return this.values().stream().collect(collector);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Optional<YamlNode> min(Comparator<? super YamlNode> comparator) {
-        return this.values().stream().min(comparator);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Optional<YamlNode> max(Comparator<? super YamlNode> comparator) {
-        return this.values().stream().max(comparator);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default long count() {
-        return this.values().stream().count();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default boolean anyMatch(Predicate<? super YamlNode> predicate) {
-        return this.values().stream().anyMatch(predicate);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default boolean allMatch(Predicate<? super YamlNode> predicate) {
-        return this.values().stream().allMatch(predicate);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default boolean noneMatch(Predicate<? super YamlNode> predicate) {
-        return this.values().stream().noneMatch(predicate);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Optional<YamlNode> findFirst() {
-        return this.values().stream().findFirst();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default Optional<YamlNode> findAny() {
-        return this.values().stream().findAny();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -230,6 +229,6 @@ public interface YamlStream extends YamlNode, Stream<YamlNode> {
      * @return JsonArray.
      */
     default JsonArray toJsonArray() {
-        return (JsonArray) this.accept(new YamlToJsonVisitor());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

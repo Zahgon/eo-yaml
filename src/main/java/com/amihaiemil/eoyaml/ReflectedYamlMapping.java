@@ -65,11 +65,8 @@ final class ReflectedYamlMapping extends BaseYamlMapping {
      * @param comment Comment of this mapping.
      */
     ReflectedYamlMapping(final Object bean, final String comment) {
-        if(bean instanceof Collection || bean.getClass().isArray()) {
-            throw new IllegalArgumentException(
-                "YamlMapping can only be reflected "
-              + "from an Object or from a Map."
-            );
+        if (bean instanceof Collection || bean.getClass().isArray()) {
+            throw new IllegalArgumentException("YamlMapping can only be reflected " + "from an Object or from a Map.");
         }
         this.bean = bean;
         this.comment = comment;
@@ -77,71 +74,17 @@ final class ReflectedYamlMapping extends BaseYamlMapping {
 
     @Override
     public Set<YamlNode> keys() {
-        final Set<YamlNode> keys = new LinkedHashSet<>();
-        if(this.bean instanceof Map) {
-            for(final Object key : ((Map) this.bean).keySet()) {
-                keys.add(this.objectToYamlNode(key));
-            }
-        } else {
-            final Method[] methods = this.bean.getClass().getDeclaredMethods();
-            for (final Method method : methods) {
-                if (Modifier.isPublic(method.getModifiers())
-                    && method.getParameterCount() == 0
-                    && !method.getReturnType().equals(Void.TYPE)
-                ) {
-                    keys.add(new MethodKey(method));
-                }
-            }
-        }
-        return keys;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlNode value(final YamlNode key) {
-        YamlNode node = null;
-        if(this.bean instanceof Map) {
-            for(final Object mapKey : ((Map) bean).keySet()) {
-                if(key.equals(this.objectToYamlNode(mapKey))) {
-                    node = this.objectToYamlNode(((Map) bean).get(mapKey));
-                    break;
-                }
-            }
-        } else {
-            if (key instanceof Scalar) {
-                final YamlNode reflectedKey = this.keys().stream().filter(
-                    k -> k.asScalar().value().equals(((Scalar) key).value())
-                ).findFirst().orElse(null);
-                if(reflectedKey == null) {
-                    node = null;
-                } else {
-                    node = this.objectToYamlNode(
-                        this.invokeMethod(reflectedKey.asScalar().value()),
-                        reflectedKey.asScalar().comment().value()
-                    );
-                }
-            } else {
-                throw new IllegalArgumentException(
-                    "Reflected YamlMapping can only have string keys "
-                  + "representing the method names of the reflected Java Bean!"
-                );
-            }
-        }
-        return node;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        return new Comment() {
-            @Override
-            public YamlNode yamlNode() {
-                return ReflectedYamlMapping.this;
-            }
-
-            @Override
-            public String value() {
-                return ReflectedYamlMapping.this.comment;
-            }
-        };
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -153,13 +96,8 @@ final class ReflectedYamlMapping extends BaseYamlMapping {
     private Object invokeMethod(final String keyName) {
         Object value = null;
         final Method[] methods = this.bean.getClass().getDeclaredMethods();
-        for(final Method method : methods) {
-            if (Modifier.isPublic(method.getModifiers())
-                && method.getParameterCount() == 0
-                && !method.getReturnType().equals(Void.TYPE)
-                && (method.getName().equalsIgnoreCase(keyName)
-                || method.getName().equalsIgnoreCase("get" + keyName))
-            ) {
+        for (final Method method : methods) {
+            if (Modifier.isPublic(method.getModifiers()) && method.getParameterCount() == 0 && !method.getReturnType().equals(Void.TYPE) && (method.getName().equalsIgnoreCase(keyName) || method.getName().equalsIgnoreCase("get" + keyName))) {
                 try {
                     value = method.invoke(this.bean);
                 } catch (final IllegalAccessException iae) {
@@ -213,44 +151,12 @@ final class ReflectedYamlMapping extends BaseYamlMapping {
 
         @Override
         public String value() {
-            String keyName;
-            final String methodName = this.method.getName();
-            if(methodName.startsWith("get") && methodName.length() > 3) {
-                final String first = String.valueOf(
-                        this.method.getName().substring(3).charAt(0)
-                );
-                keyName = first.toLowerCase();
-                if(methodName.substring(3).length() > 1) {
-                    keyName = keyName + methodName.substring(4);
-                }
-
-            } else {
-                keyName = this.method.getName();
-            }
-            return keyName;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Comment comment() {
-            return new Comment() {
-                @Override
-                public YamlNode yamlNode() {
-                    return MethodKey.this;
-                }
-
-                @Override
-                public String value() {
-                    final YamlComment yamlComment = MethodKey.this.method
-                        .getAnnotation(YamlComment.class);
-                    final String value;
-                    if(yamlComment == null) {
-                        value = "";
-                    } else {
-                        value = yamlComment.value();
-                    }
-                    return value;
-                }
-            };
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

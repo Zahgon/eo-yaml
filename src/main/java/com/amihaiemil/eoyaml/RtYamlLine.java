@@ -59,25 +59,21 @@ final class RtYamlLine implements YamlLine {
 
     @Override
     public String value() {
-        return this.value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int number() {
-        return this.number;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int indentation() {
-        int index = 0;
-        while (index < this.value.length() && this.value.charAt(index) == ' '){
-            index++;
-        }
-        return index;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        return this.value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

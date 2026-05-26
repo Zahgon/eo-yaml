@@ -28,7 +28,6 @@
 package com.amihaiemil.eoyaml.extensions;
 
 import com.amihaiemil.eoyaml.*;
-
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -66,10 +65,7 @@ public final class MergedYamlMapping extends BaseYamlMapping {
      * @param original YamlMapping in which the changes will be merged.
      * @param changed YamlMapping containing the differences.
      */
-    public MergedYamlMapping(
-        final YamlMapping original,
-        final YamlMapping changed
-    ) {
+    public MergedYamlMapping(final YamlMapping original, final YamlMapping changed) {
         this(original, changed, false);
     }
 
@@ -78,10 +74,7 @@ public final class MergedYamlMapping extends BaseYamlMapping {
      * @param original YamlMapping in which the changes will be merged.
      * @param changed Supplier of YamlMapping containing the differences.
      */
-    public MergedYamlMapping(
-        final YamlMapping original,
-        final Supplier<YamlMapping> changed
-    ) {
+    public MergedYamlMapping(final YamlMapping original, final Supplier<YamlMapping> changed) {
         this(original, changed, false);
     }
 
@@ -92,11 +85,7 @@ public final class MergedYamlMapping extends BaseYamlMapping {
      * @param changed YamlMapping containing the differences.
      * @param overrideConflicts Override key conflicts or not?
      */
-    public MergedYamlMapping(
-        final YamlMapping original,
-        final Supplier<YamlMapping> changed,
-        final boolean overrideConflicts
-    ) {
+    public MergedYamlMapping(final YamlMapping original, final Supplier<YamlMapping> changed, final boolean overrideConflicts) {
         this(original, changed.get(), overrideConflicts);
     }
 
@@ -107,15 +96,9 @@ public final class MergedYamlMapping extends BaseYamlMapping {
      * @param changed YamlMapping containing the differences.
      * @param overrideConflicts Override key conflicts or not?
      */
-    public MergedYamlMapping(
-        final YamlMapping original,
-        final YamlMapping changed,
-        final boolean overrideConflicts
-    ) {
-        if(original == null && changed == null) {
-            throw new IllegalArgumentException(
-                "Both mappings cannot be null!"
-            );
+    public MergedYamlMapping(final YamlMapping original, final YamlMapping changed, final boolean overrideConflicts) {
+        if (original == null && changed == null) {
+            throw new IllegalArgumentException("Both mappings cannot be null!");
         } else {
             this.merged = merge(original, changed, overrideConflicts);
         }
@@ -123,17 +106,17 @@ public final class MergedYamlMapping extends BaseYamlMapping {
 
     @Override
     public Set<YamlNode> keys() {
-        return this.merged.keys();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlNode value(final YamlNode key) {
-        return this.merged.value(key);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Comment comment() {
-        return this.merged.comment();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -144,13 +127,9 @@ public final class MergedYamlMapping extends BaseYamlMapping {
      * @return Merged mapping.
      * @checkstyle HiddenField (500 lines)
      */
-    private YamlMapping merge(
-        final YamlMapping original,
-        final YamlMapping changed,
-        final boolean overrideConflicts
-    ) {
+    private YamlMapping merge(final YamlMapping original, final YamlMapping changed, final boolean overrideConflicts) {
         final YamlMapping merged;
-        if(original == null || original.keys().isEmpty()) {
+        if (original == null || original.keys().isEmpty()) {
             merged = changed;
         } else if (changed == null || changed.keys().isEmpty()) {
             merged = original;
@@ -169,49 +148,30 @@ public final class MergedYamlMapping extends BaseYamlMapping {
      * @checkstyle CyclomaticComplexity (200 lines)
      * @checkstyle ExecutableStatementCount (200 lines)
      */
-    private YamlMapping recursiveMerge(
-        final YamlMapping original,
-        final YamlMapping changed,
-        final boolean overrideConflicts
-    ) {
-        YamlMappingBuilder originalBuilder = this
-            .yamlMappingBuilderFrom(original);
+    private YamlMapping recursiveMerge(final YamlMapping original, final YamlMapping changed, final boolean overrideConflicts) {
+        YamlMappingBuilder originalBuilder = this.yamlMappingBuilderFrom(original);
         final Set<YamlNode> changedKeys = changed.keys();
-        for(final YamlNode key : changedKeys) {
+        for (final YamlNode key : changedKeys) {
             final YamlNode originalValue = original.value(key);
             final YamlNode changedValue = changed.value(key);
-            if (changedValue instanceof YamlMapping
-                && originalValue instanceof YamlMapping) {
-                originalBuilder = originalBuilder.add(
-                    key,
-                    this.recursiveMerge(
-                        (YamlMapping) originalValue,
-                        (YamlMapping) changedValue,
-                        overrideConflicts
-                    )
-                );
-            } else if(overrideConflicts
-                && changedValue instanceof YamlSequence
-                && originalValue instanceof YamlSequence){
+            if (changedValue instanceof YamlMapping && originalValue instanceof YamlMapping) {
+                originalBuilder = originalBuilder.add(key, this.recursiveMerge((YamlMapping) originalValue, (YamlMapping) changedValue, overrideConflicts));
+            } else if (overrideConflicts && changedValue instanceof YamlSequence && originalValue instanceof YamlSequence) {
                 final YamlSequence originalSeq = (YamlSequence) originalValue;
                 final YamlSequence changedSeq = (YamlSequence) changedValue;
-                YamlSequenceBuilder originalSeqBuilder = this
-                    .yamlSequenceBuilderFrom(originalSeq);
+                YamlSequenceBuilder originalSeqBuilder = this.yamlSequenceBuilderFrom(originalSeq);
                 for (final YamlNode node : changedSeq.values()) {
                     if (!originalSeq.values().contains(node)) {
                         originalSeqBuilder = originalSeqBuilder.add(node);
                     }
                 }
                 final Comment newComment;
-                if(!changedSeq.comment().value().isEmpty()){
+                if (!changedSeq.comment().value().isEmpty()) {
                     newComment = changedSeq.comment();
-                }else{
+                } else {
                     newComment = originalSeq.comment();
                 }
-                originalBuilder = originalBuilder.add(
-                    key,
-                    originalSeqBuilder.build(newComment.value())
-                );
+                originalBuilder = originalBuilder.add(key, originalSeqBuilder.build(newComment.value()));
             } else {
                 final YamlNode newValue;
                 if (originalValue != null) {
@@ -227,9 +187,9 @@ public final class MergedYamlMapping extends BaseYamlMapping {
             }
         }
         final Comment newComment;
-        if(overrideConflicts && !changed.comment().value().isEmpty()){
+        if (overrideConflicts && !changed.comment().value().isEmpty()) {
             newComment = changed.comment();
-        }else{
+        } else {
             newComment = original.comment();
         }
         return originalBuilder.build(newComment.value());
@@ -240,9 +200,7 @@ public final class MergedYamlMapping extends BaseYamlMapping {
      * @param source YamlMapping source.
      * @return Builder of YamlSequence.
      */
-    private YamlSequenceBuilder yamlSequenceBuilderFrom(
-        final YamlSequence source
-    ) {
+    private YamlSequenceBuilder yamlSequenceBuilderFrom(final YamlSequence source) {
         YamlSequenceBuilder builder = Yaml.createYamlSequenceBuilder();
         for (final YamlNode node : source.values()) {
             builder = builder.add(node);
@@ -255,11 +213,8 @@ public final class MergedYamlMapping extends BaseYamlMapping {
      * @param source YamlMapping source.
      * @return Builder of YamlMapping.
      */
-    private YamlMappingBuilder yamlMappingBuilderFrom(
-        final YamlMapping source
-    ) {
-        YamlMappingBuilder builder = Yaml
-            .createYamlMappingBuilder();
+    private YamlMappingBuilder yamlMappingBuilderFrom(final YamlMapping source) {
+        YamlMappingBuilder builder = Yaml.createYamlMappingBuilder();
         for (final YamlNode key : source.keys()) {
             builder = builder.add(key, source.value(key));
         }

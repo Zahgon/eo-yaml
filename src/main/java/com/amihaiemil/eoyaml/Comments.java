@@ -47,11 +47,7 @@ interface Comments extends Iterable<Comment> {
      * @return Comment.
      */
     default Comment referringTo(final String plainScalar) {
-        return this.referringTo(
-            Yaml.createYamlScalarBuilder()
-                .addLine(plainScalar)
-                .buildPlainScalar()
-        );
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -72,13 +68,12 @@ interface Comments extends Iterable<Comment> {
 
         @Override
         public Comment referringTo(final YamlNode node) {
-            return new BuiltComment(node, "");
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Iterator<Comment> iterator() {
-            return new ArrayList<Comment>().iterator();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
-
 }

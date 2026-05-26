@@ -67,14 +67,7 @@ final class AllYamlLines implements YamlLines {
      *          - :(|[ ].*) : a colon (:) optionally followed by a space
      *            and any other characters.
      */
-    private static final Pattern SEQUENCE_OR_MAP = Pattern.compile("^("
-            + "([\\-](|[ ]+.*))|"
-            + "((?:"
-                + "('(?:[^'\\\\]|\\\\.)*')|"
-                  + "(\"(?:[^\"\\\\]|\\\\.)*\")|"
-                  + "([^\"']*)"
-                + "):(|[ ].*))"
-            + ")$");
+    private static final Pattern SEQUENCE_OR_MAP = Pattern.compile("^(" + "([\\-](|[ ]+.*))|" + "((?:" + "('(?:[^'\\\\]|\\\\.)*')|" + "(\"(?:[^\"\\\\]|\\\\.)*\")|" + "([^\"']*)" + "):(|[ ].*))" + ")$");
 
     /**
      * Yaml lines.
@@ -91,37 +84,17 @@ final class AllYamlLines implements YamlLines {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        for (final YamlLine line : this.lines) {
-            builder.append(line.toString()).append(System.lineSeparator());
-        }
-        return builder.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public YamlNode nextYamlNode(final YamlLine prev) {
-        final YamlNode node;
-        final String prevLine = prev.trimmed();
-        if(prevLine.isEmpty()) {
-            node = this.mappingSequenceOrPlainScalar(prev);
-        } else {
-            final String lastChar = prevLine.substring(prevLine.length() - 1);
-            if (prevLine.matches(Follows.FOLDED_SEQUENCE)) {
-                node = new ReadYamlSequence(prev, this);
-            } else if (lastChar.equals(Follows.LITERAL_BLOCK_SCALAR)) {
-                node = new ReadLiteralBlockScalar(prev, this);
-            } else if (lastChar.equals(Follows.FOLDED_BLOCK_SCALAR)) {
-                node = new ReadFoldedBlockScalar(prev, this);
-            } else {
-                node = this.mappingSequenceOrPlainScalar(prev);
-            }
-        }
-        return node;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Iterator<YamlLine> iterator() {
-        return this.lines.iterator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -133,33 +106,18 @@ final class AllYamlLines implements YamlLines {
      */
     private YamlNode mappingSequenceOrPlainScalar(final YamlLine prev) {
         YamlNode node = null;
-        final Iterator<YamlLine> nodeLines = new Skip(
-            this,
-            line -> line.number() <= prev.number(),
-            line -> line.trimmed().startsWith("#"),
-            line -> line.trimmed().startsWith("---"),
-            line -> line.trimmed().startsWith("..."),
-            line -> line.trimmed().startsWith("%"),
-            line -> line.trimmed().startsWith("!!")
-        ).iterator();
+        final Iterator<YamlLine> nodeLines = new Skip(this, line -> line.number() <= prev.number(), line -> line.trimmed().startsWith("#"), line -> line.trimmed().startsWith("---"), line -> line.trimmed().startsWith("..."), line -> line.trimmed().startsWith("%"), line -> line.trimmed().startsWith("!!")).iterator();
         final YamlLine first;
-        if(nodeLines.hasNext()) {
+        if (nodeLines.hasNext()) {
             first = nodeLines.next();
         } else {
             first = new YamlLine.NullYamlLine();
         }
-        if(prev.trimmed().endsWith(":")
-            && first.indentation() <= prev.indentation()
-            && !first.trimmed().startsWith("-")
-        ) {
-            node = new ReadPlainScalar(
-                this,
-                new Edited(prev.trimmed()
-                    + " null #" + prev.comment(), prev)
-            );
-        } else if(first.trimmed().matches("^\\s*\\[.*$")) {
+        if (prev.trimmed().endsWith(":") && first.indentation() <= prev.indentation() && !first.trimmed().startsWith("-")) {
+            node = new ReadPlainScalar(this, new Edited(prev.trimmed() + " null #" + prev.comment(), prev));
+        } else if (first.trimmed().matches("^\\s*\\[.*$")) {
             node = new ReadFlowSequence(prev, this);
-        } else if(first.trimmed().matches("^\\s*\\{.*$")) {
+        } else if (first.trimmed().matches("^\\s*\\{.*$")) {
             node = new ReadFlowMapping(prev, this);
         } else {
             Matcher matcher = SEQUENCE_OR_MAP.matcher(first.trimmed());
@@ -174,13 +132,7 @@ final class AllYamlLines implements YamlLines {
             }
         }
         if (node == null) {
-            throw new YamlReadingException(
-                "Could not parse YAML starting at line " + (first.number() + 1)
-                + " . It should be a sequence (line should start with '-'), "
-                + "a mapping (line should contain ':') or it should be a plain "
-                + "scalar, but it has " + this.lines.size() + " lines, "
-                + "while a plain scalar should be only 1 line!"
-            );
+            throw new YamlReadingException("Could not parse YAML starting at line " + (first.number() + 1) + " . It should be a sequence (line should start with '-'), " + "a mapping (line should contain ':') or it should be a plain " + "scalar, but it has " + this.lines.size() + " lines, " + "while a plain scalar should be only 1 line!");
         } else {
             return node;
         }

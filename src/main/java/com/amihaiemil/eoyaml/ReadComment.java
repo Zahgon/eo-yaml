@@ -45,7 +45,6 @@ final class ReadComment implements Comment {
      */
     private final String comment;
 
-
     /**
      * Constructor.
      * @param lines Lines of this comment.
@@ -58,12 +57,12 @@ final class ReadComment implements Comment {
 
     @Override
     public YamlNode yamlNode() {
-        return this.node;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String value() {
-        return this.comment;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -74,10 +73,8 @@ final class ReadComment implements Comment {
      */
     private StringBuilder calculateComments(final YamlLines lines) {
         final StringBuilder tmpComment = new StringBuilder();
-        for(final YamlLine line : lines) {
-            tmpComment
-                    .append(line.comment().trim())
-                    .append(System.lineSeparator());
+        for (final YamlLine line : lines) {
+            tmpComment.append(line.comment().trim()).append(System.lineSeparator());
         }
         return tmpComment;
     }

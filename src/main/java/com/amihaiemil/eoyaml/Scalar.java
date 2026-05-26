@@ -52,6 +52,6 @@ public interface Scalar extends YamlNode {
 
     @Override
     default List<YamlNode> children() {
-        return new ArrayList<>();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }
